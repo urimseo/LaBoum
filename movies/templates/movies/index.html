@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<header>
+  <div class="container">
+        <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <span id="ost"> Best OST of this month: Squid Game(Pink Soldiers) </span>
+              <audio autoplay controls loop id="audio-player">
+              <source src={% static 'movies/audio/Pink Soldiers.mp3' %} type="audio/mp3">
+              </audio>
+              <img src="{% static 'movies/Squidgame.jpg' %}" class="d-block w-100" alt="Laboum_logo_img">
+              <button class="btn btn-danger" id='img-button'>스릴러 영화보러가기</button>
+            </div>
+            <div class="carousel-item" >
+              <img src="{% static 'movies/laboum_img_.jpg' %}" class="d-block w-100" alt="Laboum_logo_img">
+            </div>
+            <div class="carousel-item">
+              <img src="{% static 'movies/laboum_img_.jpg' %}" class="d-block w-100" alt="Laboum_logo_img">
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+  </div>
+</header>
+
+<br>
+<br>
+<br>
+  <div class='container'>
+  <p id='ost'>장르별 대표 OST</p>
+
+    <div class="movie-list">
+      {% for movie in movies %}
+        <div class="movie">
+          <h4 style="color:rgb(241, 11, 88)">{{ movie.title }}</h4>
+          <p>{{ movie.overview }}</p>
+          <a href="{% url 'movies:detail' movie.pk %}" class="text-decoration-none;"style="font-size:25px;">자세히 보러가기</a>
+          <hr>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+{% endblock %}
+
+
+{% block script %}
+<script>
+  let pageNum = 2
+
+  document.addEventListener('scroll', (event) => {
+    console.log(event)
+    const {scrollHeight, scrollTop, clientHeight} = document.documentElement
+    // console.log(scrollHeight, scrollTop, clientHeight)
+    if (scrollHeight - Math.round(scrollTop) === clientHeight) {
+      axios({
+        method: 'get',
+        url: `/movies/?page=${pageNum}`,
+        headers: {'x-requested-with': 'XMLHttpRequest'}
+      })
+        .then((res) => {
+          const movies = res.data
+          
+          movies.forEach((movie) => {
+            const movieList = document.querySelector('.movie-list')
+            const movieDiv = document.createElement('div')
+
+            const movieHTML = `
+              <h3>${ movie.fields.title }</h3>
+              <p>${ movie.fields.overview }</p>
+              <a href="movies/${ movie.pk }/">[detail]</a>
+              <hr>
+            `
+            movieDiv.innerHTML = movieHTML
+            movieList.appendChild(movieDiv)
+          })
+          pageNum += 1
+        })
+    }
+  })
+
+</script>
+{% endblock %}

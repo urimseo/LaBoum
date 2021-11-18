@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>{{ person.username }}의 프로필 페이지</h1>
+  {% with followings=person.followings.all followers=person.followers.all %}
+    <div>
+      <div>
+        팔로잉 : 
+        <span id="followings">
+          {{ followings|length }} {{ followingsCount }}
+        </span>
+         / 팔로워 : 
+         <span id="followers">
+          {{ followers|length }} {{ followersCount }}
+         </span>
+      </div>
+
+      {% if request.user != person %}
+        <div>
+          <form class="follow-form" data-id="{{ person.pk }}">
+            {% csrf_token %}
+            {% if request.user in followers %}
+              <button id="followBtn">언팔로우</button>
+            {% else %}
+              <button id="followBtn">팔로우</button>
+            {% endif %}
+          </form>
+        </div>
+      {% endif %}
+    </div>
+  {% endwith %}
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const form = document.querySelector('.follow-form')
+    form.addEventListener('submit', (event) => {
+      event.preventDefault()
+      const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value
+      const personId = event.target.dataset.id
+
+      axios.post(`http://127.0.0.1:8000/accounts/${personId}/follow/`, {}, {
+        headers: {'X-CSRFToken': csrftoken}
+      })
+        .then((response) => {
+          const followersCount = response.data.followersCount
+          const followingsCount = response.data.followingsCount
+          const followed = response.data.followed
+          const followButton = document.querySelector(`#followBtn`)
+
+          // 팔로우 버튼 동작
+          if (followed) {
+          followButton.innerText = '언팔로우'
+          followButton.setAttribute('class', 'btn-secondary')
+          } else {
+            followButton.innerText = '팔로우'
+            followButton.setAttribute('class', 'btn-primary')
+          }
+
+          // 팔로워, 팔로잉 수 업데이트
+          const followers = document.querySelector('#followers')
+          followers.innerText = followersCount
+          const followings = document.querySelector('#followings')
+          followings.innerText = followingsCount
+        })
+        .catch((error) => {
+        if (error.response.status === 401) {
+            window.location.href = '/accounts/login/'
+        }
+      })
+    })
+
+  </script>
+
+{% endblock %}
