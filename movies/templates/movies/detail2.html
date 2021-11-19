@@ -21,7 +21,7 @@
       <span style="color:yellow"> {{movie.ost}}</span> 
       <audio autoplay controls loop id="audio-player">
       <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3">
-      </audio> 
+      </audio>
       <br>
       <br>
       <p> {{movie.overview}}</p>
@@ -30,8 +30,10 @@
 </div>
 {% endblock %}
 
-
+{% block script %}
 <script>
-    const audio = document.getElementById("audio-player");
-    audio.volume = 0.2;
+    const audio = document.querySelector("#audio-player");
+    console.log(audio)
+    audio.volume = 0.1;
 </script>
+{% endblock %}

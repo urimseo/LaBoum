@@ -54,7 +54,7 @@
               <br>
             <span style="color:yellow; font-size:25px;">{{ movie.ost }}</span>    
             <audio controls loop id="audio-player">
-            <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3">
+            <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3" id="audio-player">
             </audio> 
             <br>
             <p>{{ movie.overview }}</p>
@@ -72,10 +72,6 @@
 
 {% block script %}
 <script>
-
-  const audio = document.getElementById("audio-player");
-  audio.volume = 0.2;
-  
   let pageNum = 2
   document.addEventListener('scroll', (event) => {
     console.log(event)
