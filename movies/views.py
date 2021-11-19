@@ -5,6 +5,7 @@ from .models import Movie, Genre_movie
 from django.core.paginator import Paginator
 from django.core import serializers
 from django.http import HttpResponse
+from itertools import chain
 
 
 # Create your views here.
@@ -45,7 +46,7 @@ def detail(request, movie_pk):
 def detail2(request, genre_movie_pk):
     movie = get_object_or_404(Genre_movie, pk=genre_movie_pk)
     genres = movie.genres.filter()
-    print(genres)
+    # print(genres)
     context = {
         'movie' : movie,
         'genres' : genres,
@@ -55,7 +56,7 @@ def detail2(request, genre_movie_pk):
 
 @require_safe
 def recommended(request):
-    movies = Movie.objects.order_by('vote_average')[:10]
+    movies = Movie.objects.order_by('-vote_average')[:10]
 
     context = {
         'movies' : movies
@@ -97,3 +98,31 @@ def color(request):
     #     'movies': movies
     # }
     # return render(request, 'movies/color.html', content)
+
+
+def genre_recommend(request, genre_movie_pk):
+    movie = get_object_or_404(Genre_movie, pk=genre_movie_pk)
+    selectedgenres = movie.genres.all()
+    # print(selectedgenres[0].name)
+    movies = Genre_movie.objects.filter(genres=selectedgenres[0])
+    # movies = list(movies)
+    print(Genre_movie.objects.filter(genres=selectedgenres[0]))
+    second_movies = Movie.objects.filter(genres=selectedgenres[0])
+    # second_movies = list(second_movies)
+    results = Genre_movie.objects.filter(genres=selectedgenres[0]).values("title", "poster_path").union(Movie.objects.filter(genres=selectedgenres[0]).values("title", "poster_path"))
+    print(results)
+
+    # for b in second_movies:
+    #     if b not in movies:
+    #         movies.append(b)
+                  
+    context = {
+        'movie': movie,
+        'selectedgenres': selectedgenres,
+        'movies': movies,
+        'second_movies': second_movies,
+        'results': results,
+      
+      
+    }
+    return render(request, 'movies/genre_recommend.html', context)

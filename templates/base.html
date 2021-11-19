@@ -60,16 +60,17 @@
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
-            <a class="navbar-brand"  data-scroll  href="{% url 'movies:index' %}"><img src="{% static "images/LaBoum_logo.png"%}" alt="logo" style= width:150px height:300px></a>
+            <a class="navbar-brand"  data-scroll  href="{% url 'movies:index' %}"><img src="{% static "images/LaBoum_logo.png"%}" alt="logo" style= width:250px; height:auto;></a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                      {% if user.is_authenticated %}         
-                    <li class="nav-item"><a data-scroll href="{% url 'movies:index' %}" class="nav-link active">Home</a></li>
-                    <li class="nav-item"><a data-scroll href="{% url 'community:index'%}" class="nav-link">Community</a></li>
-                    <li class="nav-item"><a data-scroll href="{% url 'community:create'%}" class="nav-link">New Review</a></li>
+                    <li class="nav-item"><a data-scroll href="{% url 'movies:index' %}" class="nav-link active" style="font-size:20px;">Home</a></li>
+                    <li class="nav-item"><a data-scroll href="{% url 'community:index' %}" class="nav-link" style="font-size:20px;">Community</a></li>
+                    <li class="nav-item"><a data-scroll href="{% url 'community:create' %}" class="nav-link" style="font-size:20px;">New Review</a></li>
+                    <li class="nav-item"><a data-scroll href="{% url 'movies:recommended' %}" class="nav-link" style="font-size:20px;">Top 10</a></li>
                      {% else %}
-                    <li class="nav-item"><a data-scroll href="{% url 'accounts:signup' %}" class="nav-link">Signup</a></li>
-                    <li class="nav-item"><a data-scroll href="{% url 'accounts:login' %}" class="nav-link">Login</a></li>      
+                    <li class="nav-item"><a data-scroll href="{% url 'accounts:signup' %}" class="nav-link" style="font-size:20px;">Signup</a></li>
+                    <li class="nav-item"><a data-scroll href="{% url 'accounts:login' %}" class="nav-link" style="font-size:20px;">Login</a></li>      
                     {% endif %}   
                 </ul>
             </div>
@@ -78,10 +79,10 @@
                 {% if user.is_authenticated %} 
                 <form action="{% url 'accounts:logout' %}" method="POST">
                     {% csrf_token %}
-                    <input class="token" type="submit" value="Logout">
+                    <input class="token" style="font-size:20px;" type="submit" value="Logout">
                 </form>
                 {% else %}
-                <a href="{% url 'accounts:login' %}" class="token">Login</a>
+                <a href="{% url 'accounts:login' %}" class="token" style="font-size:20px;">Login</a>
                 {% endif %}   
             </div>
         </div>
@@ -96,8 +97,6 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="{% static "js/assets/jquery-3.2.1.min.js"%}"></script>
-    <script src="{% static "js/assets/particles.js"%}"></script>
-    <script src="{% static "js/assets/app.js"%}"></script>      
     <script src="{% static "js/custom.js"%}"></script>  
 
 {% block script %}

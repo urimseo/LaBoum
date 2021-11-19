@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<br>
+<div class="container">
+  <div class>
+    <div style="text-align:center">
+       <p style='color:rgb(3, 248, 114);font-size:50px'>장르: 
+      {% for genre in selectedgenres  %}
+        {{genre.name}}
+      {% endfor %}</p>
+      <br>
+      <img src="{{movie.poster_path}}" alt="img" style="width: 350px;height:auto;">
+    </div>
+    <div>
+      <h4 class='m-title' style="color:crimson;text-align:center"> {{ movie.title }}</h4>
+      <div style="text-align:center">
+        <span style="color:yellow;font-size:30px"> {{movie.ost}}</span> 
+        <audio autoplay controls loop id="audio-player">
+        <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3">
+        </audio> 
+      </div>
+      <br>
+    </div>
+  </div>
+</div>
+  <div style="text-align:center">
+    {% for result in results %}
+    {{ result.title }}
+    <br>
+    <img src="{{result.poster_path}}" alt="img">
+    <br>
+    <br>
+    {% endfor %}
+  </div> 
+ 
+
+
+{% endblock %}
+
+
+{% block script %}
+
+<script>
+    const audio = document.querySelector("#audio-player");
+    console.log(audio)
+    audio.volume = 0.2;
+</script>
+{% endblock %}

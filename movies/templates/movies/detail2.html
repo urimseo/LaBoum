@@ -31,7 +31,11 @@
 {% endblock %}
 
 
+{% block script %}
+
 <script>
-    const audio = document.getElementById("audio-player");
+    const audio = document.querySelector("#audio-player");
+    console.log(audio)
     audio.volume = 0.2;
 </script>
+{% endblock %}

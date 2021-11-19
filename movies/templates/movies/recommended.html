@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+<br>
+<div class="container ">
+  <p style="color:white;font-size:40px;text-align:center;">Rank Top 10 By Vote </p>
+    {% for movie in movies %}
+    <br>
+      <div class="movie" style="text-align:center;">
+        <h3 style="color:rgb(241, 11, 88)">{{ movie.title }}</h3>
+        <br>
+        <div style="text-align:center;">
+          <img src="{{movie.poster_path}}" alt="img" style="width:300px;height:auto">
+        </div>
+        <br>
+        <a href="{% url 'movies:detail' movie.pk %}" style="font-size:20px">{{movie.title}} 자세히 보러가기</a>
+        <br>
+        <br>
+        <hr>
+      </div>
+  </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
+

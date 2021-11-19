@@ -7,7 +7,7 @@
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <span id="ost"> Best OST of This Month: Squid Game(Pink Soldiers) </span>
+              <span id="ost"> BEST OST OF THIS MONTH: Squid Game(Pink Soldiers) </span>
               <audio controls loop id="audio-player">
               <source src={% static 'movies/audio/Pink Soldiers.mp3' %} type="audio/mp3">
               </audio>
@@ -58,8 +58,10 @@
             </audio> 
             <br>
             <p>{{ movie.overview }}</p>
+            <a href="{% url 'movies:genre_recommend' movie.pk %}" class="text-decoration-none;" style="color:mediumspringgreen;font-size:20px;">{% for genre in movie.genres.filter %}
+                  {{genre.name}} 장르 영화목록 보러가기
+               {% endfor %} </a> 
             <a href="{% url 'movies:detail2' movie.pk %}" class="text-decoration-none;"style="font-size:20px;">{{movie.title}} 자세히 보러가기</a>
-            
           <hr>
         </div>
       {% endfor %}
@@ -73,9 +75,13 @@
 {% block script %}
 <script>
 
-  const audio = document.getElementById("audio-player");
-  audio.volume = 0.2;
-  
+  const audio = document.querySelectorAll('#audio-player');
+  for( var i=0; i<audio.length;i++){
+     var item = audio[i];
+     item.volume = 0.2; 
+  }
+
+
   let pageNum = 2
   document.addEventListener('scroll', (event) => {
     console.log(event)
