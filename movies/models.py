@@ -11,7 +11,7 @@ class Movie(models.Model):
     vote_average = models.FloatField()
     overview = models.TextField()
     poster_path = models.CharField(max_length=200)
-    genres = models.ManyToManyField(Genre)
+    genres = models.ManyToManyField(Genre, related_name='movies')
 
 class Genre_movie(models.Model):
     title = models.CharField(max_length=100)
@@ -19,4 +19,4 @@ class Genre_movie(models.Model):
     ost = models.CharField(max_length=100)
     overview = models.TextField()
     poster_path = models.CharField(max_length=300)
-    genres = models.ManyToManyField(Genre)
+    genres = models.ManyToManyField(Genre, related_name='genre_movies')

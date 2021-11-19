@@ -1,6 +1,4 @@
-* h3 {
-    color: red;
-}
+
 
 header {
     margin-top: 50px;
@@ -17,7 +15,7 @@ header {
 #audio-player {
     width: 250px;
     height: 25px;
-    volume: 0.5;
+
 }
 
 #img-button {
@@ -37,8 +35,6 @@ header {
     float: right;
     width: 200px;
     height: auto;
-    bottom: 50px;
-
- 
-
+    bottom: 30px;
+   
 }

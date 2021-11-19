@@ -13,7 +13,7 @@ $(document).ready(function() {
 	});
 
   //Sticky Nav
-		$(".cripto_nav").sticky({ topSpacing: 0 });
+		// $(".cripto_nav").sticky({ topSpacing: 0 });
   
   //Scroll Spy    
       $('body').scrollspy({ target: '.cripto_nav' })
