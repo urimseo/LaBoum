@@ -88,16 +88,40 @@ def random(request):
     # /movies/ 첫번째 페이지 요청 => html
 
 def color(request):
-    reds = Movie.objects.filter(genres=28)
-    content = {
-        'reds': reds,
-    }
-    return render(request, 'movies/color.html', content)
-
-    # content = {
-    #     'movies': movies
-    # }
-    # return render(request, 'movies/color.html', content)
+    reds = Movie.objects.filter(genres__in=[80, 10752,28, 37])
+    yellows = Movie.objects.filter(genres__in=[35, 18])
+    pinks = Movie.objects.filter(genres__in=[10749, 16])
+    greens = Movie.objects.filter(genres__in=[10751, 99, 10402])
+    blues = Movie.objects.filter(genres__in=[878, 14])
+    purples = Movie.objects.filter(genres__in=[9648, 53, 27])
+    context = {}
+    if 'keyword' in request.POST:
+        if 'red' == request.POST.get('keyword'):
+            context = {
+                'reds' : reds
+            }
+        elif 'yellow' == request.POST.get('keyword'):
+            context = {
+                'yellows' : yellows
+            }
+        elif 'pink' == request.POST.get('keyword'):
+            context = {
+                'pinks' : pinks
+            }
+        elif 'green' == request.POST.get('keyword'):
+            context = {
+                'greens' : greens
+            }
+        elif 'blue' == request.POST.get('keyword'):
+            context = {
+                'blues' : blues
+            }
+        elif 'purple' == request.POST.get('keyword'):
+            context = {
+                'purples' : purples
+            }
+    return render(request, 'movies/color.html', context)
+    
 
 
 def genre_recommend(request, genre_movie_pk):
@@ -126,3 +150,4 @@ def genre_recommend(request, genre_movie_pk):
       
     }
     return render(request, 'movies/genre_recommend.html', context)
+    
