@@ -1,7 +1,7 @@
 from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_safe
-from .models import Movie
+from .models import Movie, Genre_movie
 from django.core.paginator import Paginator
 from django.core import serializers
 from django.http import HttpResponse
@@ -10,8 +10,9 @@ from django.http import HttpResponse
 # Create your views here.
 @require_safe
 def index(request):
-    movies = Movie.objects.all()
-    paginator = Paginator(movies, 10)
+    movies = Genre_movie.objects.order_by("?")
+    
+    paginator = Paginator(movies, 15)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -33,13 +34,23 @@ def index(request):
 def detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     genres = movie.genres.filter(movie=movie_pk)
-    print(genres)
-
+    # print(genres)
     context = {
         'movie' : movie,
         'genres' : genres,
     }
     return render(request, 'movies/detail.html', context)
+
+@require_safe
+def detail2(request, genre_movie_pk):
+    movie = get_object_or_404(Genre_movie, pk=genre_movie_pk)
+    genres = movie.genres.filter()
+    print(genres)
+    context = {
+        'movie' : movie,
+        'genres' : genres,
+    }
+    return render(request, 'movies/detail2.html', context)    
 
 
 @require_safe
@@ -74,7 +85,3 @@ def random(request):
     else:
         return render(request, 'movies/random.html')
     # /movies/ 첫번째 페이지 요청 => html
-
-
-
-    

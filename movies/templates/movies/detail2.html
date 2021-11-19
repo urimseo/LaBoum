@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<br>
+<div class="container d-flex">
+  <div class="row">
+    <div class="col-4">
+      <img src="{{movie.poster_path}}" alt="img" style="width: 100%;">
+    </div>
+    <div class='col-8 align-'>
+      <h1 class='m-title' style="color:crimson;text-align:center"> {{ movie.title }}</h1>
+      <br>
+      <p style='color:rgb(3, 248, 114);font-size:25px'> 개봉일: {{movie.release_date}}</p>
+       <p style='color:rgb(3, 248, 114);font-size:25px'>장르: 
+      {% for genre in genres  %}
+        {{genre.name}}
+      {% endfor %}</p>
+
+      <span style="color:yellow"> {{movie.ost}}</span> 
+      <audio autoplay controls loop id="audio-player">
+      <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3">
+      </audio> 
+      <br>
+      <br>
+      <p> {{movie.overview}}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+<script>
+    const audio = document.getElementById("audio-player");
+    audio.volume = 0.2;
+</script>

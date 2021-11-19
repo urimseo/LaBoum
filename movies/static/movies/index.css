@@ -17,6 +17,7 @@ header {
 #audio-player {
     width: 250px;
     height: 25px;
+    volume: 0.5;
 }
 
 #img-button {
@@ -29,4 +30,15 @@ header {
 
 .carousel-item {
     position: relative;
+}
+
+#poster{
+    position: relative;
+    float: right;
+    width: 200px;
+    height: auto;
+    bottom: 50px;
+
+ 
+
 }

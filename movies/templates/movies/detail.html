@@ -2,20 +2,24 @@
 {% load static %}
 
 {% block content %}
-<div class="bgimg container d-flex">
+<br>
+<br>
+<div class="container d-flex">
   <div class="row">
-    <div class="col-3">
+    <div class="col-4">
       <img src="{{movie.poster_path}}" alt="img" style="width: 100%;">
     </div>
-    <div class='col-9 align-'>
-      <h1 class='m-title'> {{ movie.title }}</h1>
-      <p> 개봉일: {{movie.release_date}}     |    
-       장르: 
+    <div class='col-8 align-'>
+      <h1 class='m-title' style="color:crimson;text-align:center"> {{ movie.title }}</h1>
+      <br>
+      <p style='color:rgb(3, 248, 114);font-size:25px'> 개봉일: {{movie.release_date}}
+      <p style='color:rgb(3, 248, 114);font-size:25px'> 장르:
       {% for genre in genres  %}
         {{genre.name}}
       {% endfor %}</p>
-      <p> 평점: {{movie.vote_average}}</p>
-      <p> 줄거리: {{movie.overview}}</p>
+
+      <p style="color:yellow; font-size:20px"> 평점: {{movie.vote_average}}</p>
+      <p> {{movie.overview}}</p>
     </div>
   </div>
 </div>

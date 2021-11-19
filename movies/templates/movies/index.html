@@ -7,8 +7,8 @@
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active">
-              <span id="ost"> Best OST of this month: Squid Game(Pink Soldiers) </span>
-              <audio autoplay controls loop id="audio-player">
+              <span id="ost"> Best OST of This Month: Squid Game(Pink Soldiers) </span>
+              <audio controls loop id="audio-player">
               <source src={% static 'movies/audio/Pink Soldiers.mp3' %} type="audio/mp3">
               </audio>
               <img src="{% static 'movies/Squidgame.jpg' %}" class="d-block w-100" alt="Laboum_logo_img">
@@ -36,28 +36,44 @@
 <br>
 <br>
 <br>
-  <div class='container'>
-  <p id='ost'>장르별 대표 OST</p>
+<div class="container">
+  <p id='ost'>장르별 추천 OST</p>
+  <br>
 
     <div class="movie-list">
       {% for movie in movies %}
         <div class="movie">
-          <h4 style="color:rgb(241, 11, 88)">{{ movie.title }}</h4>
-          <p>{{ movie.overview }}</p>
-          <a href="{% url 'movies:detail' movie.pk %}" class="text-decoration-none;"style="font-size:25px;">자세히 보러가기</a>
+            <h4 style="color:rgb(241, 11, 88)">{{ movie.title }}</h4>
+              <img src="{{movie.poster_path}}" alt="img" id="poster">
+              <span style="color:rgb(3, 248, 114); font-size:27px;"> 장르: {% for genre in movie.genres.filter %}
+                  {{genre.name}}
+               {% endfor %}  </span>
+              <br>
+            <span style="color:yellow; font-size:25px;">{{ movie.ost }}</span>    
+            <audio controls loop id="audio-player">
+            <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3">
+            </audio> 
+            <br>
+            <p>{{ movie.overview }}</p>
+            <a href="{% url 'movies:detail2' movie.pk %}" class="text-decoration-none;"style="font-size:20px;">{{movie.title}} 자세히 보러가기</a>
+            
           <hr>
         </div>
       {% endfor %}
     </div>
   </div>
+</div>
 
 {% endblock %}
 
 
 {% block script %}
 <script>
-  let pageNum = 2
 
+  const audio = document.getElementById("audio-player");
+  audio.volume = 0.2;
+  
+  let pageNum = 2
   document.addEventListener('scroll', (event) => {
     console.log(event)
     const {scrollHeight, scrollTop, clientHeight} = document.documentElement
