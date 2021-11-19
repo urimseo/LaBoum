@@ -85,3 +85,15 @@ def random(request):
     else:
         return render(request, 'movies/random.html')
     # /movies/ 첫번째 페이지 요청 => html
+
+def color(request):
+    reds = Movie.objects.filter(genres=28)
+    content = {
+        'reds': reds,
+    }
+    return render(request, 'movies/color.html', content)
+
+    # content = {
+    #     'movies': movies
+    # }
+    # return render(request, 'movies/color.html', content)
