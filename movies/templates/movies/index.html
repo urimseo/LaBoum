@@ -14,8 +14,11 @@
               <img src="{% static 'movies/Squidgame.jpg' %}" class="d-block w-100" alt="Laboum_logo_img">
               <button class="btn btn-danger" id='img-button'>스릴러 영화보러가기</button>
             </div>
-            <div class="carousel-item" >
-              <img src="{% static 'movies/laboum_img_.jpg' %}" class="d-block w-100" alt="Laboum_logo_img">
+            <div class="carousel-item">
+              <span id="ost">색상별 장르 추천받기</span>
+              <a href="{% url 'movies:color' %}">
+              <img src="{% static 'movies/color.jpg' %}" class="d-block w-100" alt="Laboum_logo_img">
+              </a>
             </div>
             <div class="carousel-item">
               <img src="{% static 'movies/laboum_img_.jpg' %}" class="d-block w-100" alt="Laboum_logo_img">

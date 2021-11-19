@@ -14,7 +14,8 @@
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'movies/index.css' %}">
   <link rel="stylesheet" href="{% static 'movies/detail.css' %}">
-  
+  <link rel="stylesheet" href="{% static 'movies/color.css' %}">
+
   <!-- Goole Font -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -59,11 +60,11 @@
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <i class="fas fa-bars"></i>
             </button>
-            <a class="navbar-brand"  data-scroll  href="index.html"><img src="{% static "images/LaBoum_logo.png"%}" alt="logo" style= width:150px height:300px></a>
+            <a class="navbar-brand"  data-scroll  href="{% url 'movies:index' %}"><img src="{% static "images/LaBoum_logo.png"%}" alt="logo" style= width:150px height:300px></a>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                      {% if user.is_authenticated %}         
-                    <li class="nav-item"><a data-scroll href="{% url 'movies:index'%}" class="nav-link active">Home</a></li>
+                    <li class="nav-item"><a data-scroll href="{% url 'movies:index' %}" class="nav-link active">Home</a></li>
                     <li class="nav-item"><a data-scroll href="{% url 'community:index'%}" class="nav-link">Community</a></li>
                     <li class="nav-item"><a data-scroll href="{% url 'community:create'%}" class="nav-link">New Review</a></li>
                      {% else %}
@@ -98,6 +99,9 @@
     <script src="{% static "js/assets/particles.js"%}"></script>
     <script src="{% static "js/assets/app.js"%}"></script>      
     <script src="{% static "js/custom.js"%}"></script>  
+
+{% block script %}
+{% endblock %}
 
 </body>
 </html>

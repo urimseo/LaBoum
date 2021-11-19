@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+    
+{% block content %}
+  <div class="container my-2 " >
+    <button class="button-78" id="red">Red</button>
+    <button class="btn-yellow" id="yellow">Yellow</button>
+    <button class="btn-pink" id="pink">Pink</button>
+    <button class="btn-green" id="green">Green</button>
+    <button class="btn-blue" id="blue">Blue</button>
+    <button class="btn-purple"  id="purple">Purple</button>
+  </div>
+  <div class="container" id="color-choose">
+    <div class="container" id="choose">
+      <h1>색상을 선택하세요</h1>
+    </div>
+    <p id="story" style="color:black;">색상 선택에 따라 영화를 추천해드립니다.</p>
+
+  </div>
+
+  <div class="row" id="temp">
+    
+  </div>
+
+{% endblock %}
+
+{% block script %}
+
+<script>
+ // 빨간색
+  const redbtn = document.querySelector('#red')
+  redbtn.addEventListener('click', function(event) {
+    // 배경색
+    const bgcolor = document.querySelector('#color-choose')
+    bgcolor.setAttribute("style","background-color:red;")
+    //색상명
+    const title = document.querySelector('#choose')
+    title.innerText = 'Red'
+    title.setAttribute("style","color:black;")
+    // 색상 내용 추가
+    const text = document.querySelector('#story')
+    text.innerText = '빨간색은 빨간색'
+    // 템플릿 변수 변경 
+
+
+
+  })
+  //노란색
+  const yellowbtn = document.querySelector('#yellow')
+  yellowbtn.addEventListener('click', function(event) {
+    // 색상명
+    const bgcolor = document.querySelector('#color-choose')
+    bgcolor.setAttribute("style","background-color:yellow;")
+
+    const title = document.querySelector('#choose')
+    //title.innerHTML='<h1 style="color:black;">노란색</h1>'
+    title.innerText = '노란색'
+    title.setAttribute("style","color:black;")
+    // 색상 내용 추가
+    const text = document.querySelector('#story')
+    text.innerText = '노란색은 노란색'
+
+    // 템플릿 변수 변경 
+    const template = document.querySelector('#temp')
+  
+  })
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+{% comment %} <script>
+  const btn = document.querySelector('#red')
+  btn.addEventListener('click', function(event){
+    const Title = document.querySelector('h1')
+    console.log(Title)
+    Title.style.color = 'red'
+
+    const colorTheme = document.querySelector('#c-story')
+    const h1 = document.createElement('h1')
+    h1.innerText = '빨간색'
+    console.log(h1)
+
+    const p = document.createElement('p')
+    p.innerText = '빨간색의 의미는 어쩌구 저쩌구 '
+    console.log(p)
+    
+  })
+  const btn2 = document.querySelector('#yello')
+  btn2.addEventListener('click', function(event){
+    const Title = document.querySelector('h1')
+    console.log(Title)
+    Title.style.color = 'yellow'
+  })
+  const btn3 = document.querySelector('#pink')
+  btn3.addEventListener('click', function(event){
+    const Title = document.querySelector('h1')
+    console.log(Title)
+    Title.style.color = 'pink'
+  })
+  const btn4 = document.querySelector('#green')
+  btn4.addEventListener('click', function(event){
+    const Title = document.querySelector('h1')
+    console.log(Title)
+    Title.style.color = 'green'
+  })
+  const btn5 = document.querySelector('#blue')
+  btn5.addEventListener('click', function(event){
+    const Title = document.querySelector('h1')
+    console.log(Title)
+    Title.style.color = 'blue'
+  })
+  const btn6 = document.querySelector('#purple')
+  btn6.addEventListener('click', function(event){
+    const Title = document.querySelector('h1')
+    console.log(Title)
+    Title.style.color = 'purple'
+  })
+</script> {% endcomment %}
+
+{% endblock  %}
