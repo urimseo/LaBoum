@@ -2,34 +2,108 @@
 {% load static %}
     
 {% block content %}
+  <h2 style="color:white;" class="text-center">색상을 선택하세요</h1>
   <div class="container my-2 " >
-    <button class="button-78" id="red">Red</button>
-    <button class="btn-yellow" id="yellow">Yellow</button>
-    <button class="btn-pink" id="pink">Pink</button>
-    <button class="btn-green" id="green">Green</button>
-    <button class="btn-blue" id="blue">Blue</button>
-    <button class="btn-purple"  id="purple">Purple</button>
+    <form action="" method="POST" id="myRedForm" onclick="change()">
+      {%csrf_token%}
+      <button type="submit" class="button-78" id="red" name="keyword" value="red" >Red</button>
+      <button type="submit" class="btn-yellow" id="yellow" name="keyword" value="yellow" >Yellow</button>
+      <button type="submit" class="btn-pink" id="pink" name="keyword" value="pink">Pink</button>
+      <button type="submit" class="btn-green" id="green" name="keyword" value="green">Green</button>
+      <button type="submit" class="btn-blue" id="blue" name="keyword" value="blue">Blue</button>
+      <button type="submit" class="btn-purple"  id="purple" name="keyword" value="purple">Purple</button>
+    </form>
   </div>
-  <div class="container" id="color-choose">
-    <div class="container" id="choose">
-      <h1>색상을 선택하세요</h1>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4" id="temp">
+  {% if reds %}
+    <div class="container" id="color-choose" style="background-color:red;">
+      <div class="container" id="choose">
+        <h1 style="color:white;">빨간색</h1>
+      </div>
+      <p id="story" style="color:black;">빨간색입니다</p>
     </div>
-    <p id="story" style="color:black;">색상 선택에 따라 영화를 추천해드립니다.</p>
-
-  </div>
-
-  <div class="row" id="temp">
-    
+    <div class="col col-2">
+      {% for red in reds %}
+      <a href="{% url 'movies:detail' red.pk %}">
+      <img src="{{ red.poster_path }}" class="card-img-top" alt="movie image">
+      {% endfor %}
+  {% elif yellows %}
+    <div class="container" id="color-choose2" style="background-color:yellow;">
+      <div class="container" id="choose">
+        <h1 style="color:black;">노란색</h1>
+      </div>
+      <p id="story" style="color:black;">노란색입니다</p>
+    </div>
+    <div class="col col-2">
+    {% for yellow in yellows %}
+        <a href="{% url 'movies:detail' yellow.pk %}">
+        <img src="{{ yellow.poster_path }}" class="card-img-top" alt="movie image">
+    {% endfor %}
+  {% elif pinks %}
+    <div class="container" id="color-choose2" style="background-color:pink;">
+      <div class="container" id="choose">
+        <h1 style="color:black;">분홍색</h1>
+      </div>
+      <p id="story" style="color:black;">분홍색입니다</p>
+    </div>
+    <div class="col col-2">
+    {% for pink in pinks %}
+        <a href="{% url 'movies:detail' pink.pk %}">
+        <img src="{{ pink.poster_path }}" class="card-img-top" alt="movie image">
+    {% endfor %}
+  {% elif greens %}
+    <div class="container" id="color-choose" style="background-color:green;">
+      <div class="container" id="choose">
+        <h1 style="color:white;">초록색</h1>
+      </div>
+      <p id="story">초록색입니다</p>
+    </div>
+    <div class="col col-2">
+    {% for green in greens %}
+        <a href="{% url 'movies:detail' green.pk %}">
+        <img src="{{ green.poster_path }}" class="card-img-top" alt="movie image">
+    {% endfor %}
+  {% elif blues %}
+    <div class="container" id="color-choose" style="background-color:blue;">
+      <div class="container" id="choose">
+        <h1 style="color:white;">파란색</h1>
+      </div>
+      <p id="story">파란색입니다</p>
+    </div>
+    <div class="col col-2">
+    {% for blue in blues %}
+        <a href="{% url 'movies:detail' blue.pk %}">
+        <img src="{{ blue.poster_path }}" class="card-img-top" alt="movie image">
+    {% endfor %}
+  {% elif purples %}
+    <div class="container" id="color-choose" style="background-color:purple;">
+      <div class="container" id="choose">
+        <h1 style="color:white;">보라색</h1>
+      </div>
+      <p id="story">보라색입니다</p>
+    </div>
+    <div class="col col-2">
+    {% for purple in purples %}
+        <a href="{% url 'movies:detail' purple.pk %}">
+        <img src="{{ purple.poster_path }}" class="card-img-top" alt="movie image">
+    {% endfor %}
+  {% endif %}
   </div>
 
 {% endblock %}
 
-{% block script %}
 
+
+{% block script %}
 <script>
+
+  const tmp = document.querySelector('#temp')
+
  // 빨간색
   const redbtn = document.querySelector('#red')
   redbtn.addEventListener('click', function(event) {
+    event.preventDefault()
     // 배경색
     const bgcolor = document.querySelector('#color-choose')
     bgcolor.setAttribute("style","background-color:red;")
@@ -42,88 +116,9 @@
     text.innerText = '빨간색은 빨간색'
     // 템플릿 변수 변경 
 
-
-
   })
-  //노란색
-  const yellowbtn = document.querySelector('#yellow')
-  yellowbtn.addEventListener('click', function(event) {
-    // 색상명
-    const bgcolor = document.querySelector('#color-choose')
-    bgcolor.setAttribute("style","background-color:yellow;")
-
-    const title = document.querySelector('#choose')
-    //title.innerHTML='<h1 style="color:black;">노란색</h1>'
-    title.innerText = '노란색'
-    title.setAttribute("style","color:black;")
-    // 색상 내용 추가
-    const text = document.querySelector('#story')
-    text.innerText = '노란색은 노란색'
-
-    // 템플릿 변수 변경 
-    const template = document.querySelector('#temp')
-  
-  })
-
-
-
 
 </script>
 
 
-
-
-
-
-
-
-{% comment %} <script>
-  const btn = document.querySelector('#red')
-  btn.addEventListener('click', function(event){
-    const Title = document.querySelector('h1')
-    console.log(Title)
-    Title.style.color = 'red'
-
-    const colorTheme = document.querySelector('#c-story')
-    const h1 = document.createElement('h1')
-    h1.innerText = '빨간색'
-    console.log(h1)
-
-    const p = document.createElement('p')
-    p.innerText = '빨간색의 의미는 어쩌구 저쩌구 '
-    console.log(p)
-    
-  })
-  const btn2 = document.querySelector('#yello')
-  btn2.addEventListener('click', function(event){
-    const Title = document.querySelector('h1')
-    console.log(Title)
-    Title.style.color = 'yellow'
-  })
-  const btn3 = document.querySelector('#pink')
-  btn3.addEventListener('click', function(event){
-    const Title = document.querySelector('h1')
-    console.log(Title)
-    Title.style.color = 'pink'
-  })
-  const btn4 = document.querySelector('#green')
-  btn4.addEventListener('click', function(event){
-    const Title = document.querySelector('h1')
-    console.log(Title)
-    Title.style.color = 'green'
-  })
-  const btn5 = document.querySelector('#blue')
-  btn5.addEventListener('click', function(event){
-    const Title = document.querySelector('h1')
-    console.log(Title)
-    Title.style.color = 'blue'
-  })
-  const btn6 = document.querySelector('#purple')
-  btn6.addEventListener('click', function(event){
-    const Title = document.querySelector('h1')
-    console.log(Title)
-    Title.style.color = 'purple'
-  })
-</script> {% endcomment %}
-
-{% endblock  %}
+{% endblock %}
