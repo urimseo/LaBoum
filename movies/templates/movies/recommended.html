@@ -1,27 +1,46 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <br>
 <br>
-<div class="container ">
-  <p style="color:white;font-size:40px;text-align:center;">Rank Top 10 By Vote </p>
+<div class="container">
+   <div style="text-align:center;">
+  <img src="{% static 'movies/Top10.jpg' %}" alt="top10" style="width:200px; height:auto;text-align:center;">
+  </div>
+  <p style="color:white;font-size:40px;text-align:center;">Rank Top 10</p>
     {% for movie in movies %}
     <br>
-      <div class="movie" style="text-align:center;">
+      <div style="text-align:center;">
         <h3 style="color:rgb(241, 11, 88)">{{ movie.title }}</h3>
-        <br>
+        <p style="font-size:25px; color:yellow;">{% for genre in movie.genres.filter %}
+        {{genre.name}}{% endfor %} /  평점: {{movie.grade}} / {{movie.ost}} </p>
+        <audio controls loop id="audio-player" style="">
+           <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3">
+        </audio>
         <div style="text-align:center;">
-          <img src="{{movie.poster_path}}" alt="img" style="width:300px;height:auto">
+          <img src="{{movie.poster_path}}" alt="img" style="width:auto;height:450px; margin-top:10px;">
         </div>
-        <br>
-        <a href="{% url 'movies:detail' movie.pk %}" style="font-size:20px">{{movie.title}} 자세히 보러가기</a>
+          <a href="{% url 'movies:detail2' movie.pk %}" style="font-size:20px">{{movie.title}} 자세히 보러가기</a>
         <br>
         <br>
         <hr>
       </div>
-  </div>
+    </div>
     {% endfor %}
 </div>
 
+{% endblock %}
+
+{% block script %}
+<script>
+
+  const audio = document.querySelectorAll('#audio-player');
+  for( var i=0; i<audio.length;i++){
+     var item = audio[i];
+     item.volume = 0.2; 
+  }
+
+</script>
 {% endblock %}
 

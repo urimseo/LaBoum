@@ -4,10 +4,10 @@
 {% block content %}
 <br>
 <br>
-<div class="container">
+{% comment %} <div class="container">
   <div class>
     <div style="text-align:center">
-       <p style='color:rgb(3, 248, 114);font-size:50px'>장르: 
+       <p style='color:rgb(3, 248, 114);font-size:50px'>
       {% for genre in selectedgenres  %}
         {{genre.name}}
       {% endfor %}</p>
@@ -25,15 +25,39 @@
       <br>
     </div>
   </div>
-</div>
-  <div style="text-align:center">
-    {% for result in results %}
-    {{ result.title }}
-    <br>
-    <img src="{{result.poster_path}}" alt="img">
-    <br>
-    <br>
+</div> {% endcomment %}
+    {% for movie in movies %}
+    <div class="container">
+      <div class='card'>
+        <div class='card_left'>
+          <img src="{{movie.poster_path}}">
+        </div>
+        <div class='card_right'>
+          <h1>{{movie.title}}</h1>
+          <div class='card_right__details'>
+            <ul>
+              <li>{% for genre in movie.genres.filter %}장르: {{genre.name}} {% endfor %}</li>
+              <li>상영시간: {{ movie.running_time}}분</li>
+              <li>평점: {{ movie.grade }}점</li>
+            </ul>
+            <p style="padding-left:40px;margin-bottom:0; font-size:14px;"> 개봉일: {{ movie.release_date }}</p>
+            <div class='card_right__review'>
+              <p>{{ movie.overview }}</p>
+              <a href="{% url 'movies:detail2' movie.pk %}">자세히 보러가기</a>
+            </div>
+          </div>
+        </div>
+        </div>
+    </div>
     {% endfor %}
+
+    {% comment %} {% for movie in second_movies %}
+    <a href="{% url 'movies:detail' movie.pk %}">{{ movie.title }}</a>
+    <br>
+    <img src="{{movie.poster_path}}" alt="img" style="width:500px">
+    <br>
+    <br>
+    {% endfor %} {% endcomment %}
   </div> 
  
 
