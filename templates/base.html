@@ -17,11 +17,6 @@
   {% endblock link %}
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
-
-  <link rel="stylesheet" href="{% static 'movies/index_card.css' %}">
-  <link rel="stylesheet" href="{% static 'movies/genre_card.css' %}">
-
-
   <!-- Goole Font -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,37 +61,37 @@
 
     <!-- START NAVBAR -->
     <header id="header-06" class="header">
-    <nav class="navbar navbar-expand-md navbar-light bg-faded cripto_nav">
-        <div class="container-fluid d-flex" id="nav-container">
-            <a class="navbar-brand"  data-scroll  href="{% url 'movies:index' %}"><img src="{% static "images/LaBoum_logo.png"%}" alt="logo" style= width:275px; height:auto;></a>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto navbar-right" id="nav-list">
-                     {% if user.is_authenticated %}         
-                    <li class="nav-item justify-content-center"><a data-scroll href="{% url 'movies:index' %}" class="nav-link active" style="font-size:25px;">Home</a></li>
-                    <li class="nav-item justify-content-center"><a data-scroll href="{% url 'movies:color' %}" class="nav-link" style="font-size:25px;">Color</a></li>
-                    <li class="nav-item justify-content-center"><a data-scroll href="{% url 'community:index' %}" class="nav-link" style="font-size:25px;">Community</a></li>
-                    
-                    <li class="nav-item"><a data-scroll href="{% url 'movies:recommended' %}" class="nav-link" style="font-size:25px;">Top 10</a></li>
-                    <li class="nav-item"><a data-scroll href="{% url 'community:create' %}" class="nav-link" style="font-size:25px;">New Review</a></li>
-                     {% else %}
-                    <li class="nav-item"><a data-scroll href="{% url 'accounts:signup' %}" class="nav-link" style="font-size:25px;">Signup</a></li>
+        <nav class="navbar navbar-expand-md navbar-light bg-faded cripto_nav">
+            <div class="container-fluid d-flex" id="nav-container">
+                <a class="navbar-brand"  data-scroll  href="{% url 'movies:index' %}"><img src="{% static "images/LaBoum_logo.png"%}" alt="logo" style= width:275px; height:auto;></a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto navbar-right" id="nav-list">
+                        {% if user.is_authenticated %}         
+                        <li class="nav-item justify-content-center"><a data-scroll href="{% url 'movies:index' %}" class="nav-link active" style="font-size:25px;">Home</a></li>
+                        <li class="nav-item justify-content-center"><a data-scroll href="{% url 'movies:color' %}" class="nav-link" style="font-size:25px;">Color</a></li>
+                        <li class="nav-item justify-content-center"><a data-scroll href="{% url 'community:index' %}" class="nav-link" style="font-size:25px;">Community</a></li>
+                        
+                        <li class="nav-item"><a data-scroll href="{% url 'movies:recommended' %}" class="nav-link" style="font-size:25px;">Top 10</a></li>
+                        <li class="nav-item"><a data-scroll href="{% url 'community:create' %}" class="nav-link" style="font-size:25px;">New Review</a></li>
+                        {% else %}
+                        <li class="nav-item"><a data-scroll href="{% url 'accounts:signup' %}" class="nav-link" style="font-size:25px;">Signup</a></li>
+                        {% endif %}   
+                    </ul>
+                </div>
+                <div class="language">
+                    {% comment %} <a href="#" class="token">Buy token</a> {% endcomment %}
+                    {% if user.is_authenticated %} 
+                    <form action="{% url 'accounts:logout' %}" method="POST">
+                        {% csrf_token %}
+                        <input class="token" style="font-size:20px;" type="submit" value="Logout">
+                    </form>
+                    {% else %}
+                    <a href="{% url 'accounts:login' %}" class="token" style="font-size:20px;">Login</a>
                     {% endif %}   
-                </ul>
+                </div>
             </div>
-            <div class="language">
-                {% comment %} <a href="#" class="token">Buy token</a> {% endcomment %}
-                {% if user.is_authenticated %} 
-                <form action="{% url 'accounts:logout' %}" method="POST">
-                    {% csrf_token %}
-                    <input class="token" style="font-size:20px;" type="submit" value="Logout">
-                </form>
-                {% else %}
-                <a href="{% url 'accounts:login' %}" class="token" style="font-size:20px;">Login</a>
-                {% endif %}   
-            </div>
-        </div>
-    </nav>
-</hearder>
+        </nav>
+    </hearder>
     <!-- END NAVBAR -->
 
 <body>

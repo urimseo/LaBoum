@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 {% load bootstrap5 %}
-
+{% load static %}
 {% block link %}
   <link rel="stylesheet" href="{% static 'community/create.css' %}">
 {% endblock link %}
 
 {% block content %}
   <h1 class="text-center">CREATE</h1>
-  <h2>dsaf</h2>
+
   <div classs="container">
     <form action="" method="POST" class="container">
       {% csrf_token %}
