@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% load bootstrap5%}
 
 {% block content %}
-  <h2 class="text-center">DETAIL</h2>
-  <h3>{{ review.pk }} 번째 글</h3>
-  <hr>
+<div class="container">
+  <h1 class="text-center" style="color:rgb(3, 248, 114)">DETAIL</h1>
+  <p>{{ review.pk }} 번째 글</p>
   <p>제목: {{ review.title }}</p>
   <p>영화 제목: {{ review.movie_title }}</p>
   <p>내용: {{ review.content }}</p>
@@ -11,26 +12,32 @@
   <p>작성 시각: {{ review.created_at }}</p>
   <p>수정 시각: {{ review.updated_at }}</p>
   <hr>
-  <h4>댓글 목록</h4>
+  <h5>댓글 목록</h5>
   {% if comments|length %}
     <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p>
   {% endif %}
   {% for comment in comments %}
     <div>
-      {{ comment.user }} - {{ comment.content }}
+      <p>{{ comment.user }}: {{ comment.content }}</p>
     </div>
   {% empty %}
-    <p><b>댓글이 없어요..</b></p>
+    <p>댓글이 없어요..</p>
   {% endfor %}
   <hr>
   {% if request.user.is_authenticated %}
     <form action="{% url 'community:create_comment' review.pk %}" method="POST">
       {% csrf_token %}
-      {{ comment_form }}
-      <input type="submit">
+      {% bootstrap_form comment_form %}
+      <button type="submit" class="btn btn-primary">작성</button>
     </form>
   {% else %}
     <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
   {% endif %}
-  <a href="{% url 'community:index' %}">[back]</a>
+  <hr>
+  <a href="{% url 'community:index' %}">
+  <button class="btn btn-secondary">되돌아가기</button>
+  </a>
+  <br>
+  <br>
+</div>
 {% endblock  %}

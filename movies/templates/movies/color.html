@@ -1,9 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
-    
+{% block title %}
+LA BOUM - Color
+{% endblock title %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'movies/color.css' %}">
+{% endblock link %}
+
 {% block content %}
-  <h2 style="color:white;" class="text-center">색상을 선택하세요</h1>
-  <div class="container my-2 " >
+  <h3 style="color:white;" class="text-center">색상을 선택하세요</h1>
+  <div class="container my-2 formbtn" >
     <form action="" method="POST" id="myRedForm" onclick="change()">
       {%csrf_token%}
       <button type="submit" class="button-78" id="red" name="keyword" value="red" >Red</button>
@@ -15,7 +22,8 @@
     </form>
   </div>
 
-  <div class="row row-cols-1 row-cols-md-3 g-4" id="temp">
+{% comment %} <div class="container"> {% endcomment %}
+  {% comment %} <div class="row" id="temp"> {% endcomment %}
   {% if reds %}
     <div class="container" id="color-choose" style="background-color:red;">
       <div class="container" id="choose">
@@ -23,11 +31,22 @@
       </div>
       <p id="story" style="color:black;">빨간색입니다</p>
     </div>
-    <div class="col col-2">
+    <div class="row row-cols-1 row-cols-md-3col-md-4"id="redbody">
       {% for red in reds %}
-      <a href="{% url 'movies:detail' red.pk %}">
-      <img src="{{ red.poster_path }}" class="card-img-top" alt="movie image">
+      <div class="news col">
+          <figure class="article">
+            <a href="{% url 'movies:detail' red.pk %}">
+            <img src="{{ red.poster_path }}" class="card-img-top" alt="movie image">
+            <figcaption>{{ red.title}}</figcaption>
+          </figure>
+        </div>
+      </div>
       {% endfor %}
+    </div>
+
+
+
+
   {% elif yellows %}
     <div class="container" id="color-choose2" style="background-color:yellow;">
       <div class="container" id="choose">
@@ -35,7 +54,7 @@
       </div>
       <p id="story" style="color:black;">노란색입니다</p>
     </div>
-    <div class="col col-2">
+    <div class="col">
     {% for yellow in yellows %}
         <a href="{% url 'movies:detail' yellow.pk %}">
         <img src="{{ yellow.poster_path }}" class="card-img-top" alt="movie image">
@@ -47,7 +66,7 @@
       </div>
       <p id="story" style="color:black;">분홍색입니다</p>
     </div>
-    <div class="col col-2">
+    <div class="col">
     {% for pink in pinks %}
         <a href="{% url 'movies:detail' pink.pk %}">
         <img src="{{ pink.poster_path }}" class="card-img-top" alt="movie image">
@@ -59,7 +78,7 @@
       </div>
       <p id="story">초록색입니다</p>
     </div>
-    <div class="col col-2">
+    <div class="col">
     {% for green in greens %}
         <a href="{% url 'movies:detail' green.pk %}">
         <img src="{{ green.poster_path }}" class="card-img-top" alt="movie image">
@@ -71,7 +90,7 @@
       </div>
       <p id="story">파란색입니다</p>
     </div>
-    <div class="col col-2">
+    <div class="col">
     {% for blue in blues %}
         <a href="{% url 'movies:detail' blue.pk %}">
         <img src="{{ blue.poster_path }}" class="card-img-top" alt="movie image">
@@ -83,18 +102,19 @@
       </div>
       <p id="story">보라색입니다</p>
     </div>
-    <div class="col col-2">
+    <div class="col">
     {% for purple in purples %}
         <a href="{% url 'movies:detail' purple.pk %}">
         <img src="{{ purple.poster_path }}" class="card-img-top" alt="movie image">
     {% endfor %}
   {% endif %}
   </div>
+</div>
 
 {% endblock %}
 
 
-
+{% comment %} 
 {% block script %}
 <script>
 
@@ -121,4 +141,4 @@
 </script>
 
 
-{% endblock %}
+{% endblock %} {% endcomment %}

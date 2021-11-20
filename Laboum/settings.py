@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'movies',
 
     'rest_framework',
+    'bootstrap5',
 
     'django.contrib.admin',
     'django.contrib.auth',

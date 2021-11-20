@@ -1,5 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
+{% block title %}
+LA BOUM
+{% endblock title %}
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'movies/index.css' %}">
+{% endblock link %}
+
 
 {% block content %}
 <header>
@@ -80,7 +88,6 @@
      var item = audio[i];
      item.volume = 0.2; 
   }
-
 
   let pageNum = 2
   document.addEventListener('scroll', (event) => {
