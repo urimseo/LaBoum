@@ -4,12 +4,12 @@
 {% block content %}
 <br>
 <br>
-<div class="container d-flex">
+<div class="container-fulid d-flex" style="margin-left:200px;margin-right:200px;">
   <div class="row">
     <div class="col-4">
       <img src="{{movie.poster_path}}" alt="img" style="width: 100%;">
     </div>
-    <div class='col-8 align-'>
+    <div class='col-8'>
       <h1 class='m-title' style="color:crimson;text-align:center"> {{ movie.title }}</h1>
       <br>
       <p style='color:rgb(3, 248, 114);font-size:25px'> 개봉일: {{movie.release_date}}</p>
@@ -24,7 +24,7 @@
       </audio>
       <br>
       <br>
-      <p> {{movie.overview}}</p>
+      <p style="font-size:20px;"> {{movie.overview}}</p>
     </div>
   </div>
 </div>

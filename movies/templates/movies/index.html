@@ -3,25 +3,30 @@
 
 {% block content %}
 <header>
-  <div class="container">
+  <div class="container" >
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
-            <div class="carousel-item active">
-              <span id="ost"> BEST OST OF THIS MONTH: Squid Game(Pink Soldiers) </span>
+            <div class="carousel-item active" style="width:100%; text-align:center">
+              <p id="ost" style="color:yellow;"> BEST OST OF THIS MONTH </p>
+              <span style="font-size:30px"> Squid Game(Pink Soldiers) </span>
               <audio controls loop id="audio-player">
               <source src={% static 'movies/audio/Pink Soldiers.mp3' %} type="audio/mp3">
               </audio>
-              <img src="{% static 'movies/Squidgame.jpg' %}" class="d-block w-100" alt="Laboum_logo_img">
-              <button class="btn btn-danger" id='img-button'>스릴러 영화보러가기</button>
+              <img src="{% static 'movies/Squidgame.jpg' %}" alt="Laboum_logo_img" style="width:100%; height:630px;">
+              <button class="btn btn-danger" id='img-button' type="button" onclick="location.href='http://127.0.0.1:8000/movies/30/genre_recommend'">
+              스릴러 영화보러가기</button>
             </div>
-            <div class="carousel-item">
-              <span id="ost">색상별 장르 추천받기</span>
+            <div class="carousel-item" style="text-align:center">
+              <p id="ost"> 당신의 현재 기분을 색으로 표현하세요.</p>
+              <span style="font-size:30px"> 당신의 기분에 맞는 영화를 추천해드립니다!</span>
               <a href="{% url 'movies:color' %}">
-              <img src="{% static 'movies/color.jpg' %}" class="d-block w-100" alt="Laboum_logo_img">
+              <img src="{% static 'movies/color.jpg' %}" class="d-block w-100" alt="Laboum_logo_img" style="height:630px;">
               </a>
             </div>
-            <div class="carousel-item">
-              <img src="{% static 'movies/laboum_img_.jpg' %}" class="d-block w-100" alt="Laboum_logo_img">
+            <div class="carousel-item" style="text-align:center">
+             <p id="ost"> 리뷰를 작성해주세요~!</p>
+             <span style="font-size:30px"> 당신의 리뷰는 소중합니다.</span>
+              <img src="{% static 'movies/laboum_img_.jpg' %}" class="d-block w-100" alt="Laboum_logo_img" style="height:630px;">
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -32,42 +37,57 @@
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
-        </div>
+        </div>  
+        <br><br><hr>
+      <div style="text-align:center">
+      <img src="{% static 'movies/rabbit.jpg' %}" alt="img">
+      <span style="font-size:100px">OST 영화관</span>
+      <br> <span id="text-box">ost를 듣고, 장르별 영화를 확인하세요!</span>
+      </div>
   </div>
 </header>
 
-<br>
-<br>
-<br>
-<div class="container">
-  <p id='ost'>장르별 추천 OST</p>
-  <br>
-
-    <div class="movie-list">
+<br><br><br><br><br>
+<div class="container-fluid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-0" style="margin-left:75px;margin-right:200px;">
       {% for movie in movies %}
-        <div class="movie">
-            <h4 style="color:rgb(241, 11, 88)">{{ movie.title }}</h4>
-              <img src="{{movie.poster_path}}" alt="img" id="poster">
-              <span style="color:rgb(3, 248, 114); font-size:27px;"> 장르: {% for genre in movie.genres.filter %}
-                  {{genre.name}}
-               {% endfor %}  </span>
-              <br>
-            <span style="color:yellow; font-size:25px;">{{ movie.ost }}</span>    
-            <audio controls loop id="audio-player">
-            <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3" id="audio-player">
-            </audio> 
-            <br>
-            <p>{{ movie.overview }}</p>
-            <a href="{% url 'movies:genre_recommend' movie.pk %}" class="text-decoration-none;" style="color:mediumspringgreen;font-size:20px;">{% for genre in movie.genres.filter %}
-                  {{genre.name}} 장르 영화목록 보러가기
-               {% endfor %} </a> 
-            <a href="{% url 'movies:detail2' movie.pk %}" class="text-decoration-none;"style="font-size:20px;">{{movie.title}} 자세히 보러가기</a>
-          <hr>
+        <div>
+         <div class="cellphone-container overflow-auto row">    
+            <div class="cmovie overflow-hidden rgb">       
+              <div class="movie-img">
+               <a href="{% url 'movies:detail2' movie.pk %}"><img class="movie-img" src="{{movie.poster_path}}" alt="img"></a></div>
+              <div class="text-movie-cont overflow-hidden" style="height:277px;">
+                <div class="mr-grid">
+                  <div class="col1" style="margin-top:6px;">
+                    <h1 class="title">
+                    <a href="{% url 'movies:detail2' movie.pk %}" style="color:crimson">{{movie.title}}</a></h1>
+                    <ul class="movie-gen">
+                      <li>{% for genre in movie.genres.filter %}
+                        <a href="{% url 'movies:genre_recommend' movie.pk%}" id="genre_link">{{genre.name}}</a> /  {% endfor %}</li>
+                      <li>{{movie.running_time}}분  /</li>
+                      <li>{{movie.grade}}점 </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="mr-grid">
+                  <div class="col1">
+                    <span class="movie-ost">{{ movie.ost }}</span>                    
+                    <audio controls loop id="audio-player" style="margin-top:8px;">
+                        <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3" id="audio-player">
+                    </audio> 
+                  </div>
+                </div>
+                <div class="mr-grid">
+                  <div class="col1" >
+                    <p class="movie-description" style="display:inline-block; margin-top:10px;">{{movie.overview}}</p>
+                      </div>
+                    </div>
+              </div>
+            </div>
+          </div>
         </div>
-      {% endfor %}
-    </div>
+        {% endfor %}
   </div>
-</div>
+
 
 {% endblock %}
 

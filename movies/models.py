@@ -17,6 +17,8 @@ class Genre_movie(models.Model):
     title = models.CharField(max_length=100)
     release_date = models.DateField()
     ost = models.CharField(max_length=100)
+    running_time = models.IntegerField(default=100)
+    grade = models.FloatField(default=5.00)
     overview = models.TextField()
     poster_path = models.CharField(max_length=300)
     genres = models.ManyToManyField(Genre, related_name='genre_movies')

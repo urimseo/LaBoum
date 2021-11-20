@@ -13,7 +13,7 @@ from itertools import chain
 def index(request):
     movies = Genre_movie.objects.order_by("?")
     
-    paginator = Paginator(movies, 15)
+    paginator = Paginator(movies, 36)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -34,7 +34,7 @@ def index(request):
 @require_safe
 def detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
-    genres = movie.genres.filter(movie=movie_pk)
+    genres = movie.genres.filter()
     # print(genres)
     context = {
         'movie' : movie,
@@ -56,36 +56,13 @@ def detail2(request, genre_movie_pk):
 
 @require_safe
 def recommended(request):
-    movies = Movie.objects.order_by('-vote_average')[:10]
+    movies = Genre_movie.objects.order_by('-grade')[:10]
 
     context = {
         'movies' : movies
     }    
     return render(request, 'movies/recommended.html', context)
 
-@require_safe
-def random(request):
-    movies = Movie.objects.all()
-    # movie_list = {}
-    # for i in range(len(movies)):
-    #     movie_list[str(i)] = movies[i].title
-    # print(movie_list)
-    # data = serializers.serialize('json', )
-    movie_list = []
-
-    # /movies/?page=2 ajax 요청 => json
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        for i in range(len(movies)):
-            movie_dict = {}
-            movie = movies[i]
-            movie_dict['randommovie_pk'] = movie.pk 
-            movie_dict['title'] = movie.title
-            movie_dict['overview'] = movie.overview
-            movie_list.append(movie_dict)
-        return JsonResponse(movie_list, safe=False)
-    else:
-        return render(request, 'movies/random.html')
-    # /movies/ 첫번째 페이지 요청 => html
 
 def color(request):
     reds = Movie.objects.filter(genres__in=[80, 10752,28, 37])
@@ -133,8 +110,8 @@ def genre_recommend(request, genre_movie_pk):
     print(Genre_movie.objects.filter(genres=selectedgenres[0]))
     second_movies = Movie.objects.filter(genres=selectedgenres[0])
     # second_movies = list(second_movies)
-    results = Genre_movie.objects.filter(genres=selectedgenres[0]).values("title", "poster_path").union(Movie.objects.filter(genres=selectedgenres[0]).values("title", "poster_path"))
-    print(results)
+    # results = Genre_movie.objects.filter(genres=selectedgenres[0]).values("title", "poster_path", "id").union(Movie.objects.filter(genres=selectedgenres[0]).values("title", "poster_path", "id"))
+    # print(results)
 
     # for b in second_movies:
     #     if b not in movies:
@@ -145,7 +122,7 @@ def genre_recommend(request, genre_movie_pk):
         'selectedgenres': selectedgenres,
         'movies': movies,
         'second_movies': second_movies,
-        'results': results,
+        # 'results': results,
       
       
     }
