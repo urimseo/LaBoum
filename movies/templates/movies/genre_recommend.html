@@ -49,7 +49,7 @@ LA BOUM - Genre
               <li>상영시간: {{ movie.running_time}}분</li>
               <li>평점: {{ movie.grade }}점</li>
             </ul>
-            <p style="padding-left:40px;margin-bottom:0; font-size:14px;"> 개봉일: {{ movie.release_date }}</p>
+            <p style="padding-left:40px; margin-bottom:0; font-size:14px;"> 개봉일: {{ movie.release_date }}</p>
             <div class='card_right__review'>
               <p>{{ movie.overview }}</p>
               <a href="{% url 'movies:detail2' movie.pk %}">자세히 보러가기</a>

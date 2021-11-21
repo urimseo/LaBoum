@@ -1,4 +1,5 @@
 {% load static %}
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -13,7 +14,7 @@
   
   <!-- static -->
   {% block link %}
-  
+
   {% endblock link %}
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
@@ -23,7 +24,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
   <!-- Bootstrap CSS -->
-  {% comment %} <link rel="stylesheet" href="{% static "css/assets/bootstrap.min.css"%}"> {% endcomment %}
+  <link rel="stylesheet" href="{% static "css/assets/bootstrap.min.css"%}">
   <!-- Font awsome CSS -->
   <link rel="stylesheet" href="{% static "css/assets/font-awesome.min.css"%}">
   <link rel="stylesheet" href="{% static "fonts/flaticon/flaticon.css"%}">
@@ -41,7 +42,7 @@
         margin-left: 150px;
         margin-right: 150px;
         display:flex;
-    
+
     }
     #nav-list {
         float: right;
@@ -59,49 +60,49 @@
     <div class="loader-section section-right"></div>
 </div> 
 
+<header id="header-06" class="header">
     <!-- START NAVBAR -->
-    <header id="header-06" class="header">
-        <nav class="navbar navbar-expand-md navbar-light bg-faded cripto_nav">
-            <div class="container-fluid d-flex" id="nav-container">
-                <a class="navbar-brand"  data-scroll  href="{% url 'movies:index' %}"><img src="{% static "images/LaBoum_logo.png"%}" alt="logo" style= width:275px; height:auto;></a>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto navbar-right" id="nav-list">
-                        {% if user.is_authenticated %}         
-                        <li class="nav-item justify-content-center"><a data-scroll href="{% url 'movies:index' %}" class="nav-link active" style="font-size:25px;">Home</a></li>
-                        <li class="nav-item justify-content-center"><a data-scroll href="{% url 'movies:color' %}" class="nav-link" style="font-size:25px;">Color</a></li>
-                        <li class="nav-item justify-content-center"><a data-scroll href="{% url 'community:index' %}" class="nav-link" style="font-size:25px;">Community</a></li>
-                        
-                        <li class="nav-item"><a data-scroll href="{% url 'movies:recommended' %}" class="nav-link" style="font-size:25px;">Top 10</a></li>
-                        <li class="nav-item"><a data-scroll href="{% url 'community:create' %}" class="nav-link" style="font-size:25px;">New Review</a></li>
-                        {% else %}
-                        <li class="nav-item"><a data-scroll href="{% url 'accounts:signup' %}" class="nav-link" style="font-size:25px;">Signup</a></li>
-                        {% endif %}   
-                    </ul>
-                </div>
-                <div class="language">
-                    {% comment %} <a href="#" class="token">Buy token</a> {% endcomment %}
-                    {% if user.is_authenticated %} 
-                    <form action="{% url 'accounts:logout' %}" method="POST">
-                        {% csrf_token %}
-                        <input class="token" style="font-size:20px;" type="submit" value="Logout">
-                    </form>
-                    {% else %}
-                    <a href="{% url 'accounts:login' %}" class="token" style="font-size:20px;">Login</a>
-                    {% endif %}   
-                </div>
+    <nav class="navbar navbar-expand-md navbar-light bg-faded cripto_nav">
+        <div class="container-fluid d-flex" id="nav-container">
+            <a class="navbar-brand"  data-scroll  href="{% url 'movies:index' %}"><img src="{% static "images/LaBoum_logo.png"%}" alt="logo" style= width:275px; height:auto;></a>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto navbar-right" id="nav-list">
+                     {% if user.is_authenticated %}
+                    <li class="nav-item justify-content-center"><a data-scroll href="{% url 'movies:index' %}" class="nav-link active" style="font-size:25px;">Home</a></li>
+                    <li class="nav-item justify-content-center"><a data-scroll href="{% url 'movies:color' %}" class="nav-link" style="font-size:25px;">Color</a></li>
+                    <li class="nav-item justify-content-center"><a data-scroll href="{% url 'community:index' %}" class="nav-link" style="font-size:25px;">Community</a></li>
+                    
+                    <li class="nav-item"><a data-scroll href="{% url 'movies:recommended' %}" class="nav-link" style="font-size:25px;">Top 10</a></li>
+                    <li class="nav-item"><a data-scroll href="{% url 'community:create' %}" class="nav-link" style="font-size:25px;">New Review</a></li>
+                     {% else %}
+                    <li class="nav-item"><a data-scroll href="{% url 'accounts:signup' %}" class="nav-link" style="font-size:25px;">Signup</a></li>
+                    {% endif %}
+                </ul>
             </div>
-        </nav>
-    </hearder>
+            <div class="language">
+                {% comment %} <a href="#" class="token">Buy token</a> {% endcomment %}
+                {% if user.is_authenticated %} 
+                <form action="{% url 'accounts:logout' %}" method="POST">
+                    {% csrf_token %}
+                    <input class="token" style="font-size:20px;  border:none;" type="submit" value="Logout">
+                </form>
+                {% else %}
+                <a href="{% url 'accounts:login' %}" class="token text-decoration-none" style="font-size:20px;">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+</hearder>
     <!-- END NAVBAR -->
-
 <body>
     {% block content %}
+
     {% endblock content %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
     <script src="{% static "js/assets/jquery-3.2.1.min.js"%}"></script>
-    <script src="{% static "js/custom.js"%}"></script>  
+    <script src="{% static "js/custom.js"%}"></script>
 
 
 {% block script %}

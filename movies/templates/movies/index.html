@@ -1,22 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block title %}
 LA BOUM
 {% endblock title %}
-
-
-
 
 {% block link %}
   <link rel="stylesheet" href="{% static 'movies/index.css' %}">
   <link rel="stylesheet" href="{% static 'movies/index_card.css' %}">
 {% endblock link %}
 
-
 {% block content %}
-<header>
+
+{% comment %} <header> {% endcomment %}
   <div class="container-fluid" >
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
@@ -32,14 +28,14 @@ LA BOUM
             </div>
             <div class="carousel-item" style="text-align:center;">
               <p id="ost"> 당신의 현재 기분을 색으로 표현하세요.</p>
-              {% comment %} <span style="font-size:30px"> 당신의 기분에 맞는 영화를 추천해드립니다!</span> {% endcomment %}
+              <p style="font-size:30px"> 당신의 기분에 맞는 영화를 추천해드립니다!</p>
               <a href="{% url 'movies:color' %}">
               <img src="{% static 'movies/color.jpg' %}" alt="Laboum_logo_img" style="width:70%; height:70%;">
               </a>
             </div>
             <div class="carousel-item" style="text-align:center">
              <p id="ost"> 리뷰를 작성해주세요~!</p>
-             {% comment %} <span style="font-size:30px"> 당신의 리뷰는 소중합니다.</span> {% endcomment %}
+             <p style="font-size:30px"> 당신의 리뷰는 소중합니다.</p>
               <img src="{% static 'movies/laboum_img_.jpg' %}" alt="Laboum_logo_img" style="width:70%; height:70%;">
             </div>
           </div>
@@ -51,25 +47,24 @@ LA BOUM
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
-        </div>  
-        <br><br><hr>
+        </div>
+        <br><br><hr> <br><br>
       <div style="text-align:center">
         <img src="{% static 'movies/rabbit.jpg' %}" alt="img">
-        
-        <div class="container">
         <span style="font-size:100px">OST 영화관</span>
         <span id="text-box">ost를 듣고, 장르별 영화를 확인하세요!</span>
-        </div>
       </div>
   </div>
-</header>
+{% comment %} </header> {% endcomment %}
 
-<br><br><br><br><br>
-<div class="container-fluid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-0" >
+
+<br>
+
+<div class="container-fluid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-0" style="margin-left:75px;">
       {% for movie in movies %}
         <div>
-         <div class="cellphone-container overflow-auto row">    
-            <div class="cmovie overflow-hidden rgb">       
+         <div class="cellphone-container overflow-auto row">
+            <div class="cmovie overflow-hidden rgb">
               <div class="movie-img">
                <a href="{% url 'movies:detail2' movie.pk %}"><img class="movie-img" src="{{movie.poster_path}}" alt="img"></a></div>
               <div class="text-movie-cont overflow-hidden" style="height:277px;">
@@ -87,7 +82,7 @@ LA BOUM
                 </div>
                 <div class="mr-grid">
                   <div class="col1">
-                    <span class="movie-ost">{{ movie.ost }}</span>                    
+                    <span class="movie-ost">{{ movie.ost }}</span>
                     <audio controls loop id="audio-player" style="margin-top:8px;">
                         <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3" id="audio-player">
                     </audio> 
@@ -106,11 +101,13 @@ LA BOUM
   </div>
 
 
+
 {% endblock %}
 
-
 {% block script %}
+
 <script>
+
 
   const audio = document.querySelectorAll('#audio-player');
   for( var i=0; i<audio.length;i++){
@@ -126,29 +123,30 @@ LA BOUM
     if (scrollHeight - Math.round(scrollTop) === clientHeight) {
       axios({
         method: 'get',
-        url: `/movies/?page=${pageNum}`,
+        url: /movies/?page=${pageNum},
         headers: {'x-requested-with': 'XMLHttpRequest'}
       })
         .then((res) => {
           const movies = res.data
-          
+
           movies.forEach((movie) => {
             const movieList = document.querySelector('.movie-list')
             const movieDiv = document.createElement('div')
 
-            const movieHTML = `
-              <h3>${ movie.fields.title }</h3>
-              <p>${ movie.fields.overview }</p>
-              <a href="movies/${ movie.pk }/">[detail]</a>
-              <hr>
-            `
-            movieDiv.innerHTML = movieHTML
-            movieList.appendChild(movieDiv)
-          })
-          pageNum += 1
-        })
-    }
+        const movieHTML = `
+          <h3>${ movie.fields.title }</h3>
+          <p>${ movie.fields.overview }</p>
+          <a href="movies/${ movie.pk }/">[detail]</a>
+          <hr>
+        `
+        movieDiv.innerHTML = movieHTML
+        movieList.appendChild(movieDiv)
+      })
+      pageNum += 1
+    })
+}
   })
 
 </script>
 {% endblock %}
+
