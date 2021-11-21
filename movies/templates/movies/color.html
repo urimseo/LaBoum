@@ -10,27 +10,28 @@ LA BOUM - Color
 
 {% block content %}
   <h2 style="color:white;" class="text-center">지금 내 기분을 색상으로 선택하세요!</h1>
-  <div class="container my-2 " >
-    <form action="" method="POST" id="myRedForm" onclick="change()">
+  <div class="container my-2" >
+    <form action="" method="POST" id="myRedForm" onclick="change()" class="d-flex justify-content-center">
       {%csrf_token%}
-      <button type="submit" class="button-78" id="red" name="keyword" value="red" >Red</button>
-      <button type="submit" class="btn-yellow" id="yellow" name="keyword" value="yellow" >Yellow</button>
-      <button type="submit" class="btn-pink" id="pink" name="keyword" value="pink">Pink</button>
-      <button type="submit" class="btn-green" id="green" name="keyword" value="green">Green</button>
-      <button type="submit" class="btn-blue" id="blue" name="keyword" value="blue">Blue</button>
-      <button type="submit" class="btn-purple"  id="purple" name="keyword" value="purple">Purple</button>
+      <button type="submit" class="button-78 mx-2" id="red" name="keyword" value="red" >Red</button>
+      <button type="submit" class="btn-yellow mx-2" id="yellow" name="keyword" value="yellow" >Yellow</button>
+      <button type="submit" class="btn-pink mx-2" id="pink" name="keyword" value="pink">Pink</button>
+      <button type="submit" class="btn-green mx-2" id="green" name="keyword" value="green">Green</button>
+      <button type="submit" class="btn-blue mx-2" id="blue" name="keyword" value="blue">Blue</button>
+      <button type="submit" class="btn-purple mx-2"  id="purple" name="keyword" value="purple">Purple</button>
     </form>
   </div>
 
-{% comment %} <div class="container"> {% endcomment %}
-  {% comment %} <div class="row" id="temp"> {% endcomment %}
+
   {% if reds %}
-    <div class="container" id="color-choose" style="background-color:red;">
-      <div class="container" id="choose">
-        <h1 style="color:white;">빨간색</h1>
-      </div>
-      <p id="story" style="color:black;">빨간색입니다</p>
-    </div>
+    <header class="card mb-4"  style="border: 3px solid var(--red); background-color:black;">
+      <h1 class= "inline"style="background-color:var(--red); color:white;">RED _액션, 범죄</h1>
+      <p style="color:white;" id="story" >• 색의 상징적 의미: 관용, 사랑, 순교, 신의, 용기
+• 색의 특성 및 성향: 눈을 자극하는 색으로, 적극적이고 공격적인 성향이 있다. 외향적이고 정력적인 색으로 혈압과 호흡, 맥박 수를 높일 수 있다. 강렬한 감정을 일으켜 사랑과 분노를 연상시키고, 흥분을 유발하기도 한다. 피와 불꽃, 힘을 상징하고, 축하와 축제의 색이기도 하다
+
+- 저녁놀이나 활활 타오르는 불의 빨강, 혹은 유혈의 빨강. 우리들은 빨강을 보면, 왠지 모르게 가슴이 덜컥한다. 그것은 빨강이 살아갈 힘을 자극하는 근원적인 생명의 색이기 때문이다. 사랑이나 일에 대해 말할 때 무엇보다도 빨강은 힘을 부여한다. </p>
+    </header>
+
       {% for red in reds %}
         <div class="news" style="display:inline-block; margin-left:120px;">
             <figure class="article">
@@ -44,67 +45,88 @@ LA BOUM - Color
     </div>
 
 
-
-
   {% elif yellows %}
-    <div class="container" id="color-choose2" style="background-color:yellow;">
-      <div class="container" id="choose">
-        <h1 style="color:black;">노란색</h1>
-      </div>
-      <p id="story" style="color:black;">노란색입니다</p>
-    </div>
-    <div class="col">
+    <header class="card mb-4" style="border: 3px solid var(--yellow); background-color:black;">
+      <h1 style="color:var(--yellow);">YELLOW</h1>
+      <p id="story">노란색입니다</p>
+    </header>
     {% for yellow in yellows %}
-        <a href="{% url 'movies:detail' yellow.pk %}">
-        <img src="{{ yellow.poster_path }}" class="card-img-top" alt="movie image">
+        <div class="news" style="display:inline-block; margin-left:120px;">
+            <figure class="article">
+              <a href="{% url 'movies:detail' yellow.pk %}">
+              <img src="{{ yellow.poster_path }}" class="card-img-top" alt="movie image">
+              <figcaption>{{ yellow.title}}</figcaption>
+            </figure>
+          </div>
+        </div>
     {% endfor %}
+
+
   {% elif pinks %}
-    <div class="container" id="color-choose2" style="background-color:pink;">
-      <div class="container" id="choose">
-        <h1 style="color:black;">분홍색</h1>
-      </div>
-      <p id="story" style="color:black;">분홍색입니다</p>
-    </div>
-    <div class="col">
+    <header class="card mb-4" style="border: 3px solid var(--pink); background-color:#ff55e8; ">
+      <h1 style="color:var(--pink);">PINK</h1>
+      <p id="story">분홍색입니다</p>
+    </header>
     {% for pink in pinks %}
-        <a href="{% url 'movies:detail' pink.pk %}">
-        <img src="{{ pink.poster_path }}" class="card-img-top" alt="movie image">
+      <div class="news " style="display:inline-block; margin-left:120px;">
+          <figure class="article" style="border:2px; box-shadow: 0px 5px 10px 3px rgb(225, 180, 236);">
+            <a href="{% url 'movies:detail' pink.pk %}">
+            <img src="{{ pink.poster_path }}" class="card-img-top" alt="movie image" >
+            <figcaption>{{ pink.title}}</figcaption>
+          </figure>
+        </div>
+      </div>
     {% endfor %}
+
+
   {% elif greens %}
-    <div class="container" id="color-choose" style="background-color:green;">
-      <div class="container" id="choose">
-        <h1 style="color:white;">초록색</h1>
-      </div>
-      <p id="story">초록색입니다</p>
-    </div>
-    <div class="col">
+    <header class="card mb-4" style="border: 3px solid var(--green); background-color:black;">
+      <h1 style="color:var(--green);">GREEN</h1>
+      <p id="story">초록색입니댜</p>
+    </header>
     {% for green in greens %}
-        <a href="{% url 'movies:detail' green.pk %}">
-        <img src="{{ green.poster_path }}" class="card-img-top" alt="movie image">
+      <div class="news" style="display:inline-block; margin-left:120px;">
+          <figure class="article">
+            <a href="{% url 'movies:detail' green.pk %}">
+            <img src="{{ green.poster_path }}" class="card-img-top" alt="movie image">
+            <figcaption>{{ green.title}}</figcaption>
+          </figure>
+        </div>
+      </div>
     {% endfor %}
+
+
   {% elif blues %}
-    <div class="container" id="color-choose" style="background-color:blue;">
-      <div class="container" id="choose">
-        <h1 style="color:white;">파란색</h1>
-      </div>
-      <p id="story">파란색입니다</p>
-    </div>
-    <div class="col">
+    <header class="card mb-4" style="border: 3px solid var(--primary); background-color:black;">
+      <h1 style="color:var(--primary);">BLUE</h1>
+      <p id="story">파란색입니다.</p>
+    </header>
     {% for blue in blues %}
-        <a href="{% url 'movies:detail' blue.pk %}">
-        <img src="{{ blue.poster_path }}" class="card-img-top" alt="movie image">
-    {% endfor %}
-  {% elif purples %}
-    <div class="container" id="color-choose" style="background-color:purple;">
-      <div class="container" id="choose">
-        <h1 style="color:white;">보라색</h1>
+      <div class="news" style="display:inline-block; margin-left:120px;">
+          <figure class="article">
+            <a href="{% url 'movies:detail' blue.pk %}">
+            <img src="{{ blue.poster_path }}" class="card-img-top" alt="movie image">
+            <figcaption>{{ blue.title}}</figcaption>
+          </figure>
+        </div>
       </div>
-      <p id="story">보라색입니다</p>
-    </div>
-    <div class="col">
+    {% endfor %}
+
+
+  {% elif purples %}
+    <header class="card mb-4" style="border: 3px solid var(--purple); background-color:black;">
+      <h1 style="color:var(--purple);">PURPLE</h1>
+      <p id="story">보라색입니다.</p>
+    </header>
     {% for purple in purples %}
-        <a href="{% url 'movies:detail' purple.pk %}">
-        <img src="{{ purple.poster_path }}" class="card-img-top" alt="movie image">
+      <div class="news" style="display:inline-block; margin-left:120px;">
+          <figure class="article">
+            <a href="{% url 'movies:detail' purple.pk %}">
+            <img src="{{ purple.poster_path }}" class="card-img-top" alt="movie image">
+            <figcaption>{{ purple.title}}</figcaption>
+          </figure>
+        </div>
+      </div>
     {% endfor %}
   {% endif %}
   </div>

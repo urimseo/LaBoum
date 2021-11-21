@@ -1,19 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block title %}
 LA BOUM
 {% endblock title %}
-
-
-
 
 {% block link %}
   <link rel="stylesheet" href="{% static 'movies/index.css' %}">
   <link rel="stylesheet" href="{% static 'movies/index_card.css' %}">
 {% endblock link %}
-
 
 {% block content %}
 <br>
@@ -66,8 +61,8 @@ LA BOUM
 <div class="container-fluid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-0" style="margin-left:70px;">
       {% for movie in movies %}
         <div>
-         <div class="cellphone-container overflow-auto row">    
-            <div class="cmovie overflow-hidden rgb">       
+         <div class="cellphone-container overflow-auto row">
+            <div class="cmovie overflow-hidden rgb">
               <div class="movie-img">
                <a href="{% url 'movies:detail2' movie.pk %}"><img class="movie-img" src="{{movie.poster_path}}" alt="img"></a></div>
               <div class="text-movie-cont overflow-hidden" style="height:277px;">
@@ -85,7 +80,7 @@ LA BOUM
                 </div>
                 <div class="mr-grid">
                   <div class="col1">
-                    <span class="movie-ost">{{ movie.ost }}</span>                    
+                    <span class="movie-ost">{{ movie.ost }}</span>
                     <audio controls loop id="audio-player" style="margin-top:8px;">
                         <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3" id="audio-player">
                     </audio> 
@@ -104,11 +99,13 @@ LA BOUM
   </div>
 
 
+
 {% endblock %}
 
-
 {% block script %}
+
 <script>
+
 
   const audio = document.querySelectorAll('#audio-player');
   for( var i=0; i<audio.length;i++){
@@ -124,29 +121,30 @@ LA BOUM
     if (scrollHeight - Math.round(scrollTop) === clientHeight) {
       axios({
         method: 'get',
-        url: `/movies/?page=${pageNum}`,
+        url: /movies/?page=${pageNum},
         headers: {'x-requested-with': 'XMLHttpRequest'}
       })
         .then((res) => {
           const movies = res.data
-          
+
           movies.forEach((movie) => {
             const movieList = document.querySelector('.movie-list')
             const movieDiv = document.createElement('div')
 
-            const movieHTML = `
-              <h3>${ movie.fields.title }</h3>
-              <p>${ movie.fields.overview }</p>
-              <a href="movies/${ movie.pk }/">[detail]</a>
-              <hr>
-            `
-            movieDiv.innerHTML = movieHTML
-            movieList.appendChild(movieDiv)
-          })
-          pageNum += 1
-        })
-    }
+        const movieHTML = `
+          <h3>${ movie.fields.title }</h3>
+          <p>${ movie.fields.overview }</p>
+          <a href="movies/${ movie.pk }/">[detail]</a>
+          <hr>
+        `
+        movieDiv.innerHTML = movieHTML
+        movieList.appendChild(movieDiv)
+      })
+      pageNum += 1
+    })
+}
   })
 
 </script>
 {% endblock %}
+

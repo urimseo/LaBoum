@@ -13,6 +13,7 @@ class Movie(models.Model):
     poster_path = models.CharField(max_length=200)
     genres = models.ManyToManyField(Genre, related_name='movies')
 
+
 class Genre_movie(models.Model):
     title = models.CharField(max_length=100)
     release_date = models.DateField()
@@ -22,3 +23,6 @@ class Genre_movie(models.Model):
     overview = models.TextField()
     poster_path = models.CharField(max_length=300)
     genres = models.ManyToManyField(Genre, related_name='genre_movies')
+
+    def __str__(self):
+        return self.overview[:10]
