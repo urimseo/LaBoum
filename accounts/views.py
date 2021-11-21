@@ -49,7 +49,7 @@ def login(request):
 @require_POST
 def logout(request):
     auth_logout(request)
-    return redirect('community:index')
+    return redirect('accounts:login')
 
 
 @login_required

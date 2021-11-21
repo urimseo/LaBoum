@@ -5,6 +5,9 @@
 LA BOUM - Top10
 {% endblock title %}
 
+{% block link %}
+  <link rel="stylesheet" href="{% static 'movies/index.css' %}">
+{% endblock link %}
 
 {% block content %}
 <br>
@@ -13,7 +16,8 @@ LA BOUM - Top10
    <div style="text-align:center;">
   <img src="{% static 'movies/Top10.jpg' %}" alt="top10" style="width:200px; height:auto;text-align:center;">
   </div>
-  <p style="color:white;font-size:40px;text-align:center;">Rank Top 10</p>
+  <p class="font-effect-neon" style="color:white;font-size:80px;text-align:center;">Rank Top 10</p>
+  <br>
     {% for movie in movies %}
     <br>
       <div style="text-align:center;">

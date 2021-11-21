@@ -31,16 +31,15 @@ LA BOUM - Color
       </div>
       <p id="story" style="color:black;">빨간색입니다</p>
     </div>
-    <div class="row row-cols-1 row-cols-md-3col-md-4"id="redbody">
       {% for red in reds %}
-      <div class="news col">
-          <figure class="article">
-            <a href="{% url 'movies:detail' red.pk %}">
-            <img src="{{ red.poster_path }}" class="card-img-top" alt="movie image">
-            <figcaption>{{ red.title}}</figcaption>
-          </figure>
+        <div class="news" style="display:inline-block; margin-left:120px;">
+            <figure class="article">
+              <a href="{% url 'movies:detail' red.pk %}">
+              <img src="{{ red.poster_path }}" class="card-img-top" alt="movie image">
+              <figcaption>{{ red.title}}</figcaption>
+            </figure>
+          </div>
         </div>
-      </div>
       {% endfor %}
     </div>
 
