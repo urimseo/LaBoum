@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
+{% block link %}
+  <link rel="stylesheet" href="{% static 'movies/index.css' %}">
+  <link rel="stylesheet" href="{% static 'movies/index_card.css' %}">
+{% endblock link %}
+
 {% block content %}
 <br>
 <br>
@@ -10,13 +16,13 @@
       <img src="{{movie.poster_path}}" alt="img" style="width: 100%;">
     </div>
     <div class='col-8'>
-      <h1 class='m-title' style="color:crimson;text-align:center"> {{ movie.title }}</h1>
+      <h1 class='m-title' style="color:crimson;text-align:center;fw-bold;"> {{ movie.title }}</h1>
       <br>
       <p style='color:rgb(3, 248, 114);font-size:25px'> 개봉일: {{movie.release_date}}</p>
        <p style='color:rgb(3, 248, 114);font-size:25px'>장르: 
       {% for genre in genres  %}
         {{genre.name}}
-      {% endfor %}</p>
+      {% endfor %}  /  상영시간:{{movie.running_time}}분  /  평점: {{movie.grade}}</p>
 
       <span style="color:yellow"> {{movie.ost}}</span> 
       <audio autoplay controls loop id="audio-player">
@@ -25,9 +31,12 @@
       <br>
       <br>
       <p style="font-size:20px;"> {{movie.overview}}</p>
+      {% for genre in movie.genres.filter %}
+      <a href="{% url 'movies:genre_recommend' movie.pk%}" id="genre_link" style="font-size:21px;">{{genre.name}} 장르 추천 영화 목록 보러가기</a>{% endfor %}
     </div>
   </div>
 </div>
+
 {% endblock %}
 
 
