@@ -118,3 +118,28 @@
   font-size: 7em;
   text-align: center;
 }
+
+
+.swiper {
+  /* width: 100%; */
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.swiper-slide {
+  background-position: center;
+  background-size: cover;
+  width: 900px;
+  height: 500px;
+  filter: blur(4px);
+  border-radius: 10px;
+  position: relative;
+  top: 10px;
+  margin-right: 0;
+}
+
+.swiper-slide-active{
+  filter: blur(0px);
+}
+
+

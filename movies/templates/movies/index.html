@@ -18,26 +18,37 @@ LA BOUM
         <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-inner">
             <div class="carousel-item active" style="width:100%; text-align:center;">
-              <p id="ost" style="color:yellow;"> BEST OST OF THIS MONTH </p>
-              <span style="font-size:30px"> Squid Game(Pink Soldiers) </span>
-              <audio controls loop id="audio-player">
-              <source src={% static 'movies/audio/Pink Soldiers.mp3' %} type="audio/mp3">
-              </audio>
+              <div class="caro1">
+                <span style="font-size:40px; color:yellow;font-weight:700;"> 이 달의 OST: Squid Game(Pink Soldiers) </span>
+                <audio controls loop onloadstart="this.volume=0.2" id="audio-player">
+                <source src={% static 'movies/audio/Pink Soldiers.mp3' %} type="audio/mp3">
+                </audio>
+              </div>
               <img src="{% static 'movies/Squidgame.jpg' %}" alt="Laboum_logo_img" style="width:70%; height:70%;">
               <button class="btn btn-danger" id='img-button' type="button" onclick="location.href='http://127.0.0.1:8000/movies/30/genre_recommend'">
               스릴러 영화보러가기</button>
             </div>
-            <div class="carousel-item" style="text-align:center;">
-              <p id="ost"> 당신의 현재 기분을 색으로 표현하세요.</p>
-              <p style="font-size:30px"> 당신의 기분에 맞는 영화를 추천해드립니다!</p>
-              <a href="{% url 'movies:color' %}">
-              <img src="{% static 'movies/color.jpg' %}" alt="Laboum_logo_img" style="width:70%; height:70%;">
-              </a>
+            <div class="carousel-item" style="text-align:center; height:738.3px;">
+              <div class="caro2">
+                <p id="ost"> 당신의 현재 기분을 Color로 표현하세요.</p>
+                <p id="ost"> 당신의 기분에 맞는 영화를 추천해드립니다!</p>
+                <button class="ghost" style="text-align:center;" onclick="location.href='{% url 'movies:color' %}'">Color 고르기</button>
+              </div>
+              <img src="{% static 'movies/color.jpg' %}" alt="Laboum_logo_img" style="width:70%; height:100%;">
             </div>
-            <div class="carousel-item" style="text-align:center">
-             <p id="ost"> 리뷰를 작성해주세요~!</p>
-             <p style="font-size:30px"> 당신의 리뷰는 소중합니다.</p>
-              <img src="{% static 'movies/laboum_img_.jpg' %}" alt="Laboum_logo_img" style="width:70%; height:70%;">
+            <div class="carousel-item" style="text-align:center; height:738.3px;">
+              <div class="caro5">
+                <p id="ost" style="color:yellow;"> OST를 듣고 영화를 추천받으세요!! ↓↓↓ OST 영화관 ↓↓↓</p>
+              </div>
+              <img src="{% static 'movies/music4.jpg' %}" alt="Laboum_logo_img" class="caro3" style="width:70%; height:100%;">
+            </div>
+            <div class="carousel-item" style="text-align:center; height:738.3px;">
+              <div class="caro4">
+                <p id="ost" style="margin-bottom:30px;"> 영화 감상평과 별점을 남겨주세요.</p>
+                <p id="ost"> 당신의 소중한 의견이 영화를 만듭니다.</p>
+                <button class="ghost" style="text-align:center;" onclick="location.href='{% url 'community:create' %}'">리뷰 작성하러가기</button>
+              </div>
+              <img src="{% static 'movies/music5.jpg' %}" alt="Laboum_logo_img" class="caro3" style="width:70%; height:100%;">
             </div>
           </div>
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
@@ -49,16 +60,18 @@ LA BOUM
             <span class="visually-hidden">Next</span>
           </button>
         </div>
-        <br><br><hr> <br><br>
-      <div style="text-align:center">
-        <img src="{% static 'movies/rabbit.jpg' %}" alt="img">
-        <span style="font-size:100px">OST 영화관</span>
-        <span id="text-box">ost를 듣고, 장르별 영화를 확인하세요!</span>
-      </div>
-  </div>
+        <br><br><hr> 
+        <img src="{% static 'movies/red.png'%}" alt="img" id="red">
+        <div class="theater" style="display:inline-block; text-align:center">
+          <img src="{% static 'movies/rabbit.jpg' %}" alt="img">
+          <p style="font-size:100px; margin-bottom:70px;">OST 영화관</p>
+          <p style="font-size:40px;">ost를 듣고, 장르별 영화를 확인하세요!</p>
+          <span style="font-size:20px; color:yellow;"> ( 영화 또는 장르 선택 ) </span>
+        </div>
+   </div>
 
 
-<div class="container-fluid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-0" style="margin-left:70px;">
+<div class="container-fluid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-0" style="margin-left:70px;" id="card-container">
       {% for movie in movies %}
         <div>
          <div class="cellphone-container overflow-auto row">
@@ -81,8 +94,8 @@ LA BOUM
                 <div class="mr-grid">
                   <div class="col1">
                     <span class="movie-ost">{{ movie.ost }}</span>
-                    <audio controls loop id="audio-player" style="margin-top:8px;">
-                        <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3" id="audio-player">
+                    <audio controls loop onloadstart="this.volume=0.2" id="audio-player" style="margin-top:8px;">
+                        <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3">
                     </audio> 
                   </div>
                 </div>
@@ -105,10 +118,8 @@ LA BOUM
 {% block script %}
 
 <script>
-
-
   const audio = document.querySelectorAll('#audio-player');
-  for( var i=0; i<audio.length;i++){
+  for(var i=0; i<audio.length;i++){
      var item = audio[i];
      item.volume = 0.2; 
   }
