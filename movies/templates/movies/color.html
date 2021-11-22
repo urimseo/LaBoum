@@ -9,7 +9,7 @@ LA BOUM - Color
 {% endblock link %}
 
 {% block content %}
-  <h2 style="color:white;" class="text-center">지금 내 기분을 색상으로 선택하세요!</h1>
+  <h2 style="color:white;" class="text-center">🌈지금 내 기분을 색상으로 선택하세요!🌈</h1>
   <div class="container my-2" >
     <form action="" method="POST" id="myRedForm" onclick="change()" class="d-flex justify-content-center">
       {%csrf_token%}
@@ -25,15 +25,22 @@ LA BOUM - Color
 
   {% if reds %}
     <header class="card mb-4"  style="border: 3px solid var(--red); background-color:black;">
-      <h1 class= "inline"style="background-color:var(--red); color:white;">RED _액션, 범죄</h1>
-      <p style="color:white;" id="story" >• 색의 상징적 의미: 관용, 사랑, 순교, 신의, 용기
-• 색의 특성 및 성향: 눈을 자극하는 색으로, 적극적이고 공격적인 성향이 있다. 외향적이고 정력적인 색으로 혈압과 호흡, 맥박 수를 높일 수 있다. 강렬한 감정을 일으켜 사랑과 분노를 연상시키고, 흥분을 유발하기도 한다. 피와 불꽃, 힘을 상징하고, 축하와 축제의 색이기도 하다
 
-- 저녁놀이나 활활 타오르는 불의 빨강, 혹은 유혈의 빨강. 우리들은 빨강을 보면, 왠지 모르게 가슴이 덜컥한다. 그것은 빨강이 살아갈 힘을 자극하는 근원적인 생명의 색이기 때문이다. 사랑이나 일에 대해 말할 때 무엇보다도 빨강은 힘을 부여한다. </p>
+      <h1 style="color: var(--red); font-weight:bold;">RED</h1>
+      <h3 style="background-color: var(--red); color:black;">범죄, 전쟁, 액션, 서부 </h3>
+      <h6 style="color:white;">
+ 빨간색은  외향적이고 정력적인 색으로, 적극적이고 공격적인 성향이 있고, 혈압과 호흡, 맥박 수를 높일 수 있다. <br>
+ 
+ 사랑과 분노를 연상시키고 피와 불꽃, 힘을 상징하고, 축하와 축제의 색이기도 하다
+<br>
+저녁놀이나 활활 타오르는 불의 빨강, 혹은 유혈의 빨강. 우리들은 빨강을 보면, 왠지 모르게 가슴이 덜컥한다. 
+<br>
+그것은 빨강이 살아갈 힘을 자극하는 근원적인 생명의 색이고 힘을 부여하기 때문이다. 
+</h6>
     </header>
 
       {% for red in reds %}
-        <div class="news" style="display:inline-block; margin-left:120px;">
+        <div class="news" style="display:inline-block; margin-left:120px; box-shadow: 0px 5px 10px 3px var(--red);">
             <figure class="article">
               <a href="{% url 'movies:detail' red.pk %}">
               <img src="{{ red.poster_path }}" class="card-img-top" alt="movie image">
@@ -46,12 +53,21 @@ LA BOUM - Color
 
 
   {% elif yellows %}
-    <header class="card mb-4" style="border: 3px solid var(--yellow); background-color:black;">
-      <h1 style="color:var(--yellow);">YELLOW</h1>
-      <p id="story">노란색입니다</p>
+    <header class="card mb-4" style="border: 3px solid var(--yellow); background-color:#fff2cc;">
+      <h1 style="color: var(--yellow); font-weight:bold;">YELLOW</h1>
+      <h3 style="background-color: var(--yellow); color:black;"> 애니메이션, 코미디 </h3>
+      <h6 style="color:black;">
+      노랑은 희망이라는 의미의 세계 공통의 색으로 상쾌하고 찬란한 느낌을 주며, 즐겁고 가슴 설레는 색이다.
+      <br>
+      노란색은 신경 시스템을 촉진시키고, 기억력을 향상시킨다고 한다. 
+      <br>
+      아이들의 그림을 조사해 보면, 유아기의 어린이일수록 노란색을 좋아한다. 
+      <br>
+      부모로부터 받은 사랑의 에너지의 상징이 노란색으로 묘사되는 것이다. 
+      </h6>
     </header>
     {% for yellow in yellows %}
-        <div class="news" style="display:inline-block; margin-left:120px;">
+        <div class="news" style="display:inline-block; margin-left:120px; box-shadow: 0px 5px 10px 3px var(--yellow);">
             <figure class="article">
               <a href="{% url 'movies:detail' yellow.pk %}">
               <img src="{{ yellow.poster_path }}" class="card-img-top" alt="movie image">
@@ -63,13 +79,24 @@ LA BOUM - Color
 
 
   {% elif pinks %}
-    <header class="card mb-4" style="border: 3px solid var(--pink); background-color:#ff55e8; ">
-      <h1 style="color:var(--pink);">PINK</h1>
-      <p id="story">분홍색입니다</p>
+    <header class="card mb-4" style="border: 3px solid var(--pink); background-color:#f4e0e0;">
+      <h1 style="color:var(--pink); font-weight:bold; ">PINK</h1>
+      <h3 style="background-color: var(--pink); color:white;"> 로맨스, 드라마 </h3>
+      <h6 style="color:black;">
+      핑크는 행복으로 가는 꿈을 이야기 하는 색으로 건강과 관련이 깊은 색이다. 
+      <br>
+      연애 전선의 긍정적인 기운을 뜻하며, 몸에 열이 있을 때 열에 대한 반응으로 표출되기도 한다.
+      <br>
+      화가 피카소는 20대 중반에 페르난도라는 연인이 생기고 나서부터 핑크색을 메인 컬러로 한 작품을 계속 그려내어,
+      <br> 「장미의 시대」라고 불리는 걸작 시리즈를 남겼다. 핑크는 긴장을 풀어주고 안정시켜주는 효과가 있는 것 같다.
+      <br>
+       그렇기 때문에 연애감정이나 부드러움이 핑크와 연관되는 것은 자연스러운 일인지도 모른다.
+      </h6>
     </header>
+
     {% for pink in pinks %}
       <div class="news " style="display:inline-block; margin-left:120px;">
-          <figure class="article" style="border:2px; box-shadow: 0px 5px 10px 3px rgb(225, 180, 236);">
+          <figure class="article" style="border:2px; box-shadow: 0px 5px 10px 3px var(--pink);">
             <a href="{% url 'movies:detail' pink.pk %}">
             <img src="{{ pink.poster_path }}" class="card-img-top" alt="movie image" >
             <figcaption>{{ pink.title}}</figcaption>
@@ -80,12 +107,22 @@ LA BOUM - Color
 
 
   {% elif greens %}
-    <header class="card mb-4" style="border: 3px solid var(--green); background-color:black;">
-      <h1 style="color:var(--green);">GREEN</h1>
-      <p id="story">초록색입니댜</p>
+    <header class="card mb-4" style="border: 3px solid var(--green); background-color:#ecffe5; ">
+      <h1 style="color:var(--green); font-weight:bold;">GREEN</h1>
+      <h3 style="background-color: var(--green); color:white;"> 가족, 다큐멘터리, 음악 </h3>
+      <h6 style="color:black;">
+      초록은 몸과 마음에 휴식을 주는 색으로 마음을 평온하게 해주고 진정시키며, 신경과 근육의 긴장을 완화시킨다. 
+      <br>
+      물의 잎과 같은 색으로 자연을 상징하며, 회복력, 자제력, 조화를 뜻하기도 한다.
+      <br>
+      인간의 시각은 빨강에서 보라까지 볼 수가 있다. 각각의 색은 서로 다른 빛의 파장을 가지고 있고,
+      <br> 그 정가운데에 위치하는 것이 초록이다. 그만큼 인간에게 있어서 초록은 밸런스를 갖춘 색이라고 할 수 있다.
+      <br>
+      실제로 초록색은 부교감신경을 자극하여 릴렉스 효과가 있다는 것이 과학적으로도 증명되어있다.
+      </h6>
     </header>
     {% for green in greens %}
-      <div class="news" style="display:inline-block; margin-left:120px;">
+      <div class="news" style="display:inline-block; margin-left:120px; box-shadow: 0px 5px 10px 3px var(--green);">
           <figure class="article">
             <a href="{% url 'movies:detail' green.pk %}">
             <img src="{{ green.poster_path }}" class="card-img-top" alt="movie image">
@@ -97,12 +134,26 @@ LA BOUM - Color
 
 
   {% elif blues %}
-    <header class="card mb-4" style="border: 3px solid var(--primary); background-color:black;">
+    <header class="card mb-4" style="border: 3px solid var(--primary); background-color:#cfe2f3;">
       <h1 style="color:var(--primary);">BLUE</h1>
-      <p id="story">파란색입니다.</p>
+      <h3 style="background-color: var(--primary); color:white;">SF, 판타지</h3>
+      <h6 style="color:black;">
+      파랑은 마음을 고요함으로 이끄는 색으로 정신을 나타내는 색이며 자제와 적응을 상징한다.
+      <br>
+      시원한 색으로 수도꼭지에서 냉수를 상징하며, 감정적으로는 조용하고 이성적인 느낌을 준다. 
+      <br>
+      많은 사람들은 파란색이 평화롭고 고요하며 맑은 여름 하늘처럼 생각한다. 
+      <br>
+      그러나 파란색이 깊고 강렬 해지면이 내부 반사가 바뀐다.하늘이 폭풍우에 빠지며 물이 분노하는 듯한 느낌을 받는다.
+      <br>
+       파랑은 일상의 인간관계에서 빠져 나와 무한 세계로 자신을 해방시켜 준다.
+      <br>  고독함 속에서도 자립한 자유로운 삶을 시작할 때, 파랑은 용기를 부여해 줄지도 모른다.
+      <br>
+
+      </h6>
     </header>
     {% for blue in blues %}
-      <div class="news" style="display:inline-block; margin-left:120px;">
+      <div class="news" style="display:inline-block; margin-left:120px; box-shadow: 0px 5px 10px 3px var(--primary);">
           <figure class="article">
             <a href="{% url 'movies:detail' blue.pk %}">
             <img src="{{ blue.poster_path }}" class="card-img-top" alt="movie image">
@@ -114,12 +165,22 @@ LA BOUM - Color
 
 
   {% elif purples %}
-    <header class="card mb-4" style="border: 3px solid var(--purple); background-color:black;">
+    <header class="card mb-4" style="border: 3px solid var(--purple); background-color:black; ">
       <h1 style="color:var(--purple);">PURPLE</h1>
-      <p id="story">보라색입니다.</p>
+      <h3 style="background-color: var(--purple); color:white;"> 미스터리, 스릴러, 공포</h3>
+      <h6 style="color:white;">
+      보라는 신비로운 힘을 나타내는 색으로 고귀함, 속죄, 신성함, 죽음, 기다림을 뜻한다. 
+      <br>
+      또한 대립되는 양면성의 감정이 혼재하는 심리를 나타내는 색이다. 보라색은 유령과 악마 사이의 경계를 넘나든다.
+      <br>
+      미국의 심리학자 '알슐러'와 '해트윅'은 보라색을 '침체된 우울한 기분이나 체험을 가진 불행한 아이'라 했다.
+      <br>보라는 마음 깊은 곳의 억압된 감정과 연관이 있으며, 고귀하고 장중한 느낌을 주기도 한다.
+      <br>
+
+      </h6>
     </header>
     {% for purple in purples %}
-      <div class="news" style="display:inline-block; margin-left:120px;">
+      <div class="news" style="display:inline-block; margin-left:120px;box-shadow: 0px 5px 10px 3px var(--purple);">
           <figure class="article">
             <a href="{% url 'movies:detail' purple.pk %}">
             <img src="{{ purple.poster_path }}" class="card-img-top" alt="movie image">

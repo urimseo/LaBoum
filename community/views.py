@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
+from django.contrib.auth.decorators import login_required
+
 from .models import Review, Comment
 from .forms import ReviewForm, CommentForm
 from django.http.response import JsonResponse
 from django.http import HttpResponse
 
-
+@login_required
 @require_GET
 def index(request):
     reviews = Review.objects.order_by('-pk')
@@ -14,7 +16,7 @@ def index(request):
     }
     return render(request, 'community/index.html', context)
 
-
+@login_required
 @require_http_methods(['GET', 'POST'])
 def create(request):
     if request.method == 'POST':
@@ -31,7 +33,7 @@ def create(request):
     }
     return render(request, 'community/create.html', context)
 
-
+@login_required
 @require_GET
 def detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
@@ -44,7 +46,36 @@ def detail(request, review_pk):
     }
     return render(request, 'community/detail.html', context)
 
+@login_required
+@require_http_methods(['GET', 'POST'])
+def update_review(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.user == review.user:
+        if request.method == 'POST':
+            form = ReviewForm(request.POST, instance=review)
+            if form.is_valid():
+                review = form.save()
+                return redirect('community:detail', review.pk)
+        else:
+            form = ReviewForm(instance=review)
 
+        context = {'form': form,
+                   'review': review,}
+        return render(request, 'community/create.html', context)
+    else:
+        return redirect('community:detail', review.pk)
+
+
+@login_required
+@require_POST
+def delete_review(request, review_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    if request.user == review.user:
+        review.delete()
+    return redirect('community:index')
+
+
+@login_required
 @require_POST
 def create_comment(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
@@ -62,7 +93,17 @@ def create_comment(request, review_pk):
     }
     return render(request, 'community/detail.html', context)
 
+@login_required
+@require_POST
+def delete_comment(request, review_pk, comment_pk):
+    review = get_object_or_404(Review, pk=review_pk)
+    comment = get_object_or_404(Comment, pk=comment_pk)
+    if request.user == comment.user:
+        comment.delete()
+    return redirect('community:detail', review.pk)
 
+
+@login_required
 @require_POST
 def like(request, review_pk):
     if request.user.is_authenticated:
@@ -83,3 +124,15 @@ def like(request, review_pk):
         return JsonResponse(like_status)
     # return redirect('accounts:login')
     return HttpResponse(status=401)
+
+# @require_POST
+# def dislike_review(request, review_pk):
+#     review = get_object_or_404(Review, pk=review_pk)
+#     if review.dislike_users.filter(pk=request.user.pk).exists():
+#         # 취소
+#         review.dislike_users.remove(request.user)
+#     # 아니라면
+#     else:
+#         # 추가
+#         review.dislike_users.add(request.user)
+#     return redirect('community:review_detail', review.pk)

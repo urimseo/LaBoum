@@ -12,6 +12,18 @@
   <p>작성 시각: {{ review.created_at }}</p>
   <p>수정 시각: {{ review.updated_at }}</p>
   <hr>
+  {% if request.user == review.user %}
+  <form action="{% url 'community:update_review' review.pk %}" method="GET">
+    <input type="submit" value="UPDATE">
+  </form>
+
+  <form action="{% url 'community:delete_review' review.pk %}" method="POST">
+  {% csrf_token %}
+  <input type="submit" value="Delete">
+  </form>
+  {% endif %}
+
+
   <h5>댓글 목록</h5>
   {% if comments|length %}
     <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p>
@@ -20,6 +32,12 @@
     <div>
       <p>{{ comment.user }}: {{ comment.content }}</p>
     </div>
+      {% if request.user == comment.user %}
+      <form style="display: inline-block;" action="{% url 'community:delete_comment' review.pk comment.pk %}" method="POST">
+        {% csrf_token %}
+        <button>[X]</button>
+      </form>
+    {% endif %}
   {% empty %}
     <p>댓글이 없어요..</p>
   {% endfor %}
@@ -40,4 +58,8 @@
   <br>
   <br>
 </div>
+
+
+
+
 {% endblock  %}
