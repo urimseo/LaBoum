@@ -1,15 +1,31 @@
 {% extends 'base.html' %}
 
+{% load static %}
+{% block link %}
+  <link rel="stylesheet" href="{% static 'community/index.css' %}">
+{% endblock link %}
+
 {% block content %}
-  <h1 class="text-center">Community</h1>
+<br>
+<div class="container">
+  <h1 class="text-center" style="color:white;">영화 리뷰 게시판</h1>
+  <button class="button-64 float-right"> <a href="{% url 'community:create' %}" class="text-decoration-none">리뷰 작성하기</a></button>
+</div>
+<br>
+<br>
 
   <div class="container">
   {% for review in reviews %}
     {% comment %} <p>글 번호: {{ review.pk }}</p> {% endcomment %}
-    <p>글 제목: {{ review.title }}</p>
-    <p>리뷰 내용: {{ review.content }}</p>
-    <p>작성자: {{ review.user }}</p>
-    <p>작성자 : <a href="{% url 'accounts:profile' review.user.username %}">{{ review.user }}</a></p>
+    <p style="font-size: 30px; color:cyan;"> {{review.movie_title}} </p>
+    <span><a href="{% url 'community:detail' review.pk %}" style="font-size: 25px; color:white;">제목: {{ review.title }} [{{ review.comment_set.all|length }}]</a></span>
+    <span style="color:crimson;font-size: 23px;"> {{ review.get_rank_display }}</span><br>
+    <span style="font-size: 21px; color:white;">작성자: {{ review.user }}      작성시간: {{review.created_at}}</span>
+    <button class="button-64"><a href="{% url 'community:detail' review.pk %}">자세히 보러가기</a></button>
+
+     <br>
+     <br>
+     
      <form class="like-form" data-id="{{ review.pk }}">
       {% csrf_token %}
       {% if user in review.like_users.all %}
@@ -27,10 +43,12 @@
       {{ review.like_users.all|length }}
       </span> 명이 이 글을 좋아합니다.
     </p>
-    <a href="{% url 'community:detail' review.pk %}">[detail]</a>
     <hr>
   {% endfor %}
   </div>
+
+
+
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <script>

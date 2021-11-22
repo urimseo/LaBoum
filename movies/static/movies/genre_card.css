@@ -14,7 +14,8 @@
   border-radius: 10px;
   /* -webkit-border-radius: 10px; */
   /* -moz-border-radius: 10px; */
-  box-shadow: 0px 15px 40px 3px rgba(253, 253, 253, 0.55);
+  box-shadow: rgba(255, 255, 255, 0.19) 0px 10px 20px, rgba(245, 245, 245, 0.23) 0px 6px 6px;
+
 }
  .card_left {
   position:relative;
@@ -142,4 +143,7 @@
   filter: blur(0px);
 }
 
+.hyunwoo {
+  background: black !important;
+}
 
