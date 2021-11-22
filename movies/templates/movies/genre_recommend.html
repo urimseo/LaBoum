@@ -16,7 +16,7 @@ LA BOUM - Genre
 <br>
 <br>
 <br>
-<div class="container">
+<div class="container-fluid" style="background:black">
     <div style="text-align:center">
        <p class="font-effect-neon" style='color:white;font-size:100px'>
       {% for genre in selectedgenres  %}
@@ -36,11 +36,11 @@ LA BOUM - Genre
       <br>
     </div>
   </div>
-  <div class="swiper mySwiper">
-    <div class="swiper-wrapper">
+  <div class="swiper mySwiper" style="background:black">
+    <div class="swiper-wrapper" >
 
     {% for movie in movies %}
-      <div class="swiper-slide">
+      <div class="swiper-slide" style="background:black">
         <div class="container">
           <div class='card rgb' style="border:0;border-radius:0;">
             <div class='card_left' style="border-radius:0;">
@@ -66,7 +66,7 @@ LA BOUM - Genre
       </div>
     {% endfor %}
     {% for movie in second_movies %}
-      <div class="swiper-slide">
+      <div class="swiper-slide" style="background:black">
         <div class="container">
           <div class='card rgb'  style="border:0;border-radius:0;">
             <div class='card_left' style="border-radius:0;">

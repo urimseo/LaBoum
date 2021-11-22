@@ -6,19 +6,25 @@ LA BOUM - Color
 
 {% block link %}
   <link rel="stylesheet" href="{% static 'movies/color.css' %}">
+  <link rel="stylesheet" href="{% static 'movies/index.css' %}">
 {% endblock link %}
 
 {% block content %}
-  <h2 style="color:white;" class="text-center">🌈지금 내 기분을 색상으로 선택하세요!🌈</h1>
+      <div style="text-align:center;">
+        <h2 style="color:white;display:inline-block; text-align:center;" class="text-center">🌈지금 내 기분을 색상으로 선택하세요!🌈</h2>
+        <audio autoplay controls loop onloadstart="this.volume=0.2" id="audio-player">
+          <source src={% static 'movies/audio/Colors.mp3' %} type="audio/mp3">
+        </audio>
+      </div>
   <div class="container my-2" >
     <form action="" method="POST" id="myRedForm" onclick="change()" class="d-flex justify-content-center">
       {%csrf_token%}
-      <button type="submit" class="button-78 mx-2" id="red" name="keyword" value="red" >Red</button>
-      <button type="submit" class="btn-yellow mx-2" id="yellow" name="keyword" value="yellow" >Yellow</button>
-      <button type="submit" class="btn-pink mx-2" id="pink" name="keyword" value="pink">Pink</button>
-      <button type="submit" class="btn-green mx-2" id="green" name="keyword" value="green">Green</button>
-      <button type="submit" class="btn-blue mx-2" id="blue" name="keyword" value="blue">Blue</button>
-      <button type="submit" class="btn-purple mx-2"  id="purple" name="keyword" value="purple">Purple</button>
+      <button type="submit" class="button-78 col-2 mx-2" id="red" name="keyword" value="red" >Red</button>
+      <button type="submit" class="btn-yellow col-2 mx-2" id="yellow" name="keyword" value="yellow" >Yellow</button>
+      <button type="submit" class="btn-pink col-2 mx-2" id="pink" name="keyword" value="pink">Pink</button>
+      <button type="submit" class="btn-green col-2 mx-2" id="green" name="keyword" value="green">Green</button>
+      <button type="submit" class="btn-blue col-2 mx-2" id="blue" name="keyword" value="blue">Blue</button>
+      <button type="submit" class="btn-purple col-2 mx-2"  id="purple" name="keyword" value="purple">Purple</button>
     </form>
   </div>
 

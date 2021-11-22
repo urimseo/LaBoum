@@ -7,7 +7,7 @@
 {% endblock link %}
 
 {% block content %}
-  <h1 class="text-center">CREATE</h1>
+  <h1 class="text-center" style="color:white;">영화 리뷰 작성하기</h1>
 
   <div classs="container">
     <form action="" method="POST" class="container">
@@ -43,14 +43,10 @@
                     id="content" rows="10">{{ form.content.value|default_if_none:'' }}</textarea>
       </div>{% endcomment %}
       <br>
-      <button type="submit" class="btn btn-primary">저장하기</button>
+          <button type="submit" class="button-64 btn-m1" role="button"><span class="text">저장하기</span></button>
     </form> 
-      <div class="container">
-      <hr>
-      <a href="{% url 'community:index' %}" >
-      <button class="btn btn-secondary">되돌아가기</button>
-      </a>
-      </div>
+          <a href="{% url 'community:index' %}" class="text-decoration-none">
+            <button class="button-64 btn-m2 text-decoration-none" role="button"><span class="text-decoration-none">돌아가기</span></button>
+          </a>
   </div>
-  <hr>
 {% endblock %}

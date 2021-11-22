@@ -4703,7 +4703,7 @@ select {
 
 .body_06 {
 	color: #ffffff;
-	background: black;
+	background: #141414;
 }
 .body_06 p {
 	line-height: 26px;
@@ -4729,7 +4729,7 @@ select {
 	color: #19233b !important;
 }
 #header-06 {
-	background: black;
+	background: #141414;
 	position: relative;
 	height: 100%;
 	z-index: 99;

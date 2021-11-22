@@ -17,7 +17,9 @@ body {
   height: 650px;
   background-color: #000000;
   margin: 60px auto 0 auto;
-  box-shadow: 2px 2px 30px 5px rgb(104, 97, 97);
+  /* box-shadow: 2px 2px 30px 2px rgb(83, 81, 81); */
+  box-shadow: rgba(255, 255, 255, 0.19) 0px 10px 20px, rgba(245, 245, 245, 0.23) 0px 6px 6px;  
+  /* box-shadow: rgba(255, 255, 255, 0.3) 0px 19px 38px, rgba(255, 255, 255, 0.22) 0px 15px 12px; */
   z-index: 111 !important;
   border-radius: 4px;
 }

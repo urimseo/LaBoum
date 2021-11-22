@@ -115,10 +115,10 @@ header {
 .theater{
     width: 100%;
     position: relative;
-    bottom: 600px;
+    bottom: 700px;
 }
 
 #card-container{
     position: relative;
-    bottom: 400px;
+    bottom: 500px;
 }
