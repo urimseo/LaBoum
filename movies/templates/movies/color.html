@@ -11,7 +11,7 @@ LA BOUM - Color
 {% block content %}
   <h2 style="color:white;" class="text-center">🌈지금 내 기분을 색상으로 선택하세요!🌈</h1>
   <div class="container my-2" >
-    <form action="" method="POST" id="myRedForm" onclick="change()" class="d-flex justify-content-center">
+    <form action="" method="POST" id="myRedForm" class="d-flex justify-content-center">
       {%csrf_token%}
       <button type="submit" class="button-78 mx-2" id="red" name="keyword" value="red" >Red</button>
       <button type="submit" class="btn-yellow mx-2" id="yellow" name="keyword" value="yellow" >Yellow</button>

@@ -9,7 +9,7 @@ class ReviewForm(forms.ModelForm):
         fields = ['title', 'movie_title', 'rank', 'content']
         widgets = {
             'title': forms.TextInput(attrs={'placeholder':'글의 제목을 작성하세요'}),
-            'movie_title': forms.TextInput(attrs={'placeholder':'영화명을 작성하세요'}),
+            # 'movie_title': forms.TextInput(attrs={'placeholder':'영화명을 작성하세요'}),
             # 'rank': forms.Select(attrs={'placeholder':'평점을 선택하세요'}),
             'content': forms.Textarea(attrs={'placeholder':'리뷰를 작성하세요'}),
         }
