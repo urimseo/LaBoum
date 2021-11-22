@@ -9,8 +9,8 @@
     <p>글 제목: {{ review.title }}</p>
     <p>리뷰 내용: {{ review.content }}</p>
     <p>작성자: {{ review.user }}</p>
-    {% comment %} <p>작성자 : <a href="{% url 'accounts:profile' review.user.username %}">{{ review.user }}</a></p> {% endcomment %}
-    {% comment %} <form class="like-form" data-id="{{ review.pk }}">
+    <p>작성자 : <a href="{% url 'accounts:profile' review.user.username %}">{{ review.user }}</a></p>
+     <form class="like-form" data-id="{{ review.pk }}">
       {% csrf_token %}
       {% if user in review.like_users.all %}
         <button class="btn-link">
@@ -21,12 +21,12 @@
           <i id="like-{{ review.pk }}" class="fas fa-heart fa-lg" style="color:black"></i>
         </button> 
       {% endif %}
-    </form> {% endcomment %}
-    {% comment %} <p>
+    </form> 
+    <p>
       <span id="like-count-{{ review.pk }}">
       {{ review.like_users.all|length }}
       </span> 명이 이 글을 좋아합니다.
-    </p> {% endcomment %}
+    </p>
     <a href="{% url 'community:detail' review.pk %}">[detail]</a>
     <hr>
   {% endfor %}

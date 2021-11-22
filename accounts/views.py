@@ -7,7 +7,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST, require_http_methods
 from .forms import CustomUserCreationForm
-
+    
 
 @require_http_methods(['GET', 'POST'])
 def signup(request):
@@ -59,7 +59,6 @@ def profile(request, username):
         'person': person,
     }
     return render(request, 'accounts/profile.html', context)
-
 
 @require_POST
 def follow(request, user_pk):

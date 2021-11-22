@@ -1,6 +1,7 @@
 from django.http.response import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.views.decorators.http import require_safe
+from django.contrib.auth.decorators import login_required
 from .models import Movie, Genre_movie
 from django.core.paginator import Paginator
 from django.core import serializers
@@ -9,6 +10,7 @@ from itertools import chain
 
 
 # Create your views here.
+@login_required
 @require_safe
 def index(request):
     movies = Genre_movie.objects.order_by("?")
@@ -30,7 +32,7 @@ def index(request):
 
         return render(request, 'movies/index.html', context)
 
-
+@login_required
 @require_safe
 def detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
@@ -43,6 +45,7 @@ def detail(request, movie_pk):
     }
     return render(request, 'movies/detail.html', context)
 
+@login_required
 @require_safe
 def detail2(request, genre_movie_pk):
     movie = get_object_or_404(Genre_movie, pk=genre_movie_pk)
@@ -54,7 +57,7 @@ def detail2(request, genre_movie_pk):
     }
     return render(request, 'movies/detail2.html', context)    
 
-
+@login_required
 @require_safe
 def recommended(request):
     movies = Genre_movie.objects.order_by('-grade')[:10]
@@ -64,7 +67,7 @@ def recommended(request):
     }    
     return render(request, 'movies/recommended.html', context)
 
-
+@login_required
 def color(request):
     reds = Movie.objects.filter(genres__in=[80, 10752,28, 37])
     yellows = Movie.objects.filter(genres__in=[35, 18])
@@ -101,7 +104,7 @@ def color(request):
     return render(request, 'movies/color.html', context)
     
 
-
+@login_required
 def genre_recommend(request, genre_movie_pk):
     movie = get_object_or_404(Genre_movie, pk=genre_movie_pk)
     selectedgenres = movie.genres.all()

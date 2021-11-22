@@ -6,7 +6,7 @@
 
 * {
   font-family: 'Gowun Dodum', sans-serif;
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
 }
 
 
@@ -27,26 +27,17 @@ align-items: center;
 overflow: hidden;
 }
 
-.css-user {
-background-color: black;
-color: white;
-display: flex;
-flex-direction: column;
-justify-content: center;
-border-radius: 20px;
-width: 40%;
-height: auto;
-padding: 40px;
-z-index: 1;
-
-}
-
-
 h1 {
 text-align: center;
 }
 
-
 input {
-  border-radius: 20px;
+  border-radius: 10px;
+  font-size:x-large;
+  width: 400px;
+  
+}
+
+* label {
+  font-size:x-large;
 }
