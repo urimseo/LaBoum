@@ -27,4 +27,4 @@ class Genre_movie(models.Model):
     genres = models.ManyToManyField(Genre, related_name='genre_movies')
 
     def __str__(self):
-        return self.overview[:10]
+        return self.title
