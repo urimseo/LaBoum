@@ -1,60 +1,72 @@
 {% extends 'base.html' %}
-{% load bootstrap5%}
+{% load bootstrap5 %}
+
+{% load static %}
+{% block link %}
+  <link rel="stylesheet" href="{% static 'community/detail.css' %}">
+  <link rel="stylesheet" href="{% static 'community/create.css' %}">
+  <link rel="stylesheet" href="{% static 'community/index.css' %}">
+{% endblock link %}
 
 {% block content %}
+<br>
 <div class="container">
-  <h1 class="text-center" style="color:rgb(3, 248, 114)">DETAIL</h1>
-  <p>{{ review.pk }} 번째 글</p>
-  <p>제목: {{ review.title }}</p>
-  <p>영화 제목: {{ review.movie_title }}</p>
-  <p>내용: {{ review.content }}</p>
-  <p>평점: {{ review.rank }}</p>
-  <p>작성 시각: {{ review.created_at }}</p>
-  <p>수정 시각: {{ review.updated_at }}</p>
-  <hr>
-  {% if request.user == review.user %}
-  <form action="{% url 'community:update_review' review.pk %}" method="GET">
-    <input type="submit" value="UPDATE">
-  </form>
+  <h1 class="text-center neon-black" style="color:white;">{{review.title}}</h1>
 
-  <form action="{% url 'community:delete_review' review.pk %}" method="POST">
-  {% csrf_token %}
-  <input type="submit" value="Delete">
-  </form>
-  {% endif %}
+  <br>
+  <div class="detailbox">
+    <p style="color:black; font-size:30px; font-weight:700; text-align:center;">[영화리뷰] {{ review.movie_title }}</p>
+    <p style="color:crimson; font-size:25px; font-weight:700; text-align:center;">{{ review.get_rank_display }}</p>
+    <br><br>
+    <p style="color:black; font-size:22px;">{{ review.content|linebreaksbr }}</p>
+    <p style="color:black; margin-bottom:10px; text-align:end;">작성 시각: {{ review.created_at }}</p>
+    <p style="color:black; text-align:end;">수정 시각: {{ review.updated_at }}</p>
+    <div class="text-align:end">
+      {% if request.user == review.user %}
+      <form action="{% url 'community:update_review' review.pk %}" method="GET">
+        <button type="submit" class="button-64 btn-m3" role="button"><span class="text">수정하기</span></button>
+      </form>
 
+      <form action="{% url 'community:delete_review' review.pk %}" method="POST">
+      {% csrf_token %}
+      <button type="submit" class="button-64 btn-m4" role="button"><span class="text">삭제하기</span></button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+<br><br>
 
-  <h5>댓글 목록</h5>
+  <h3 class="text-center neon-black" style="color:white;">댓글 목록</h3>
   {% if comments|length %}
-    <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p>
+    <p class="text-center">{{ comments|length }}개의 댓글이 있습니다.</p>
   {% endif %}
   {% for comment in comments %}
     <div>
-      <p>{{ comment.user }}: {{ comment.content }}</p>
-    </div>
+      <span style="font-size:20px;"> ID : {{ comment.user }} - {{ comment.content }}</span>
       {% if request.user == comment.user %}
       <form style="display: inline-block;" action="{% url 'community:delete_comment' review.pk comment.pk %}" method="POST">
         {% csrf_token %}
-        <button>[X]</button>
+              <button class="comment-btn"><p style="color:black;">X</p></button>
       </form>
+    </div>
     {% endif %}
+
   {% empty %}
-    <p>댓글이 없어요..</p>
+    <p style="font-size:20px;">댓글이 없어요..</p>
   {% endfor %}
   <hr>
+
   {% if request.user.is_authenticated %}
     <form action="{% url 'community:create_comment' review.pk %}" method="POST">
       {% csrf_token %}
       {% bootstrap_form comment_form %}
-      <button type="submit" class="btn btn-primary">작성</button>
+      <button type="submit" class="button-64 btn-m7" role="button"><span class="text">작성하기</span></button>
     </form>
   {% else %}
     <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a>
   {% endif %}
   <hr>
-  <a href="{% url 'community:index' %}">
-  <button class="btn btn-secondary">되돌아가기</button>
-  </a>
+  <button type="submit" class="button-64 btn-m8" role="button" onclick="location.href='{% url 'community:index' %}'"><span class="text">돌아가기</span></button>
   <br>
   <br>
 </div>

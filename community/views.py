@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required
-
+from django.core.paginator import Paginator
 from .models import Review, Comment
 from .forms import ReviewForm, CommentForm
 from django.http.response import JsonResponse
@@ -11,10 +11,21 @@ from django.http import HttpResponse
 @require_GET
 def index(request):
     reviews = Review.objects.order_by('-pk')
+    paginator = Paginator(reviews, 6)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+
     context = {
         'reviews': reviews,
+        'page_obj' : page_obj,
     }
     return render(request, 'community/index.html', context)
+
+
+
+
 
 @login_required
 @require_http_methods(['GET', 'POST'])

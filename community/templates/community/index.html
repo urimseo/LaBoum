@@ -1,50 +1,53 @@
 {% extends 'base.html' %}
-
 {% load static %}
+{% load bootstrap5 %}
+
 {% block link %}
   <link rel="stylesheet" href="{% static 'community/index.css' %}">
+  <link href="https://fonts.googleapis.com/css?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
 {% endblock link %}
 
 {% block content %}
 <br>
 <div class="container">
-  <h1 class="text-center" style="color:white;">영화 리뷰 게시판</h1>
-  <button class="button-64 float-right"> <a href="{% url 'community:create' %}" class="text-decoration-none">리뷰 작성하기</a></button>
+  <h1 class="text-center neon neon-s" style="color:white;">영화 리뷰 게시판</h1>
+  <a href="{% url 'community:create' %} " class="text-decoration-none neon-black neon-s float-right">리뷰 작성하기</a>
+<br>
 </div>
 <br>
-<br>
-
-  <div class="container">
-  {% for review in reviews %}
-    {% comment %} <p>글 번호: {{ review.pk }}</p> {% endcomment %}
-    <p style="font-size: 30px; color:cyan;"> {{review.movie_title}} </p>
-    <span><a href="{% url 'community:detail' review.pk %}" style="font-size: 25px; color:white;">제목: {{ review.title }} [{{ review.comment_set.all|length }}]</a></span>
-    <span style="color:crimson;font-size: 23px;"> {{ review.get_rank_display }}</span><br>
-    <span style="font-size: 21px; color:white;">작성자: {{ review.user }}      작성시간: {{review.created_at}}</span>
-    <button class="button-64"><a href="{% url 'community:detail' review.pk %}">자세히 보러가기</a></button>
-
-     <br>
-     <br>
+  <div class="container text-center" style="border-radius: 20px;">
+  {% for review in page_obj %}
+  <div class="rgyPostIt">
+    <p style="font-size: 22px; font-weight:800; color:black; margin-bottom:10px;"> {{review.movie_title}} </p>
+    <span><a href="{% url 'community:detail' review.pk %}" style="font-size: 17px; font-weight:600; color:black;">제목: {{ review.title }} [{{ review.comment_set.all|length }}]</a></span>
+    <span style="color:crimson;font-size: 20px;"> {{ review.get_rank_display }}</span><br>
+    <span style="font-size: 13px; color:black;">작성자: {{ review.user }}  작성시간: {{review.created_at}}</span>
+    <a href="{% url 'community:detail' review.pk %}" class="text-decoration-none neon-black2 " style="font-size:18px;">자세히 보러가기</a>
      
-     <form class="like-form" data-id="{{ review.pk }}">
+     <br>
+     <form class="like-form" data-id="{{ review.pk }}" id="heart">
       {% csrf_token %}
       {% if user in review.like_users.all %}
         <button class="btn-link">
-          <i id="like-{{ review.pk }}" class="fas fa-heart fa-lg" style="color:crimson"></i>
+          <i id="like-{{ review.pk }}" class="fas fa-heart" style="color:crimson"></i>
         </button> 
       {% else %}
-        <button class="btn-link">
-          <i id="like-{{ review.pk }}" class="fas fa-heart fa-lg" style="color:black"></i>
+        <button class="btn-link" >
+          <i id="like-{{ review.pk }}" class="fas fa-heart" style="color:black"></i>
         </button> 
       {% endif %}
     </form> 
-    <p>
-      <span id="like-count-{{ review.pk }}">
+    <p style="color:black;">
+      <span id="like-count-{{ review.pk }}" style="color:black;">
       {{ review.like_users.all|length }}
       </span> 명이 이 글을 좋아합니다.
     </p>
-    <hr>
+  </div>  
   {% endfor %}
+</div>
+<br>
+  <div class="d-flex justify-content-center" >
+        {% bootstrap_pagination page_obj %}
   </div>
 
 
