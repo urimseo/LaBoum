@@ -4,11 +4,13 @@
 {% load static %}
 {% block link %}
   <link rel="stylesheet" href="{% static 'community/create.css' %}">
+  <link rel="stylesheet" href="{% static 'community/index.css' %}">
 {% endblock link %}
 
 {% block content %}
-  <h1 class="text-center" style="color:white;">영화 리뷰 작성하기</h1>
-
+<br>
+  <h1 class="text-center neon neon-s" style="color:white;">영화 리뷰 작성하기</h1>
+  <br>
   <div classs="container">
     <form action="" method="POST" class="container">
       {% csrf_token %}

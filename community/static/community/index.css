@@ -12,8 +12,7 @@
     font-size: 20px;
     justify-content: center;
     line-height: 1em;
-    max-width: 100%;
-    min-width: 140px;
+    max-width: 100px;
     padding: 3px;
     text-decoration: none;
     user-select: none;
@@ -35,6 +34,7 @@
     width: 100%;
     height: 100%;
     transition: 300ms;
+    font-size: 20px;
   }
   
   .button-64:hover span {
@@ -43,8 +43,8 @@
   
   @media (min-width: 768px) {
     .button-64 {
-      font-size: 24px;
-      min-width: 196px;
+      font-size: 18px;
+      min-width: 130px;
     }
   }
 
@@ -56,7 +56,154 @@
       font-family: 'Gowun Dodum';
       text-decoration: none;
       justify-content: center;
-      /* color:darkblue */
+      /* color:khaki */
 
   }
 
+
+
+  .neon {
+    color: #fff;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px #fff,
+      0 0 40px #0ff,
+      0 0 80px #0ff,
+      0 0 90px #0ff,
+      0 0 100px #0ff,
+      0 0 150px #0ff;
+  }
+  
+  .neon-s {
+    font-weight: 400;
+    /* text-align: center; */
+    text-transform: uppercase;
+  }
+
+  .neon-black {
+    color: #fff;
+    text-shadow:
+      0 0 5px #fff,
+      0 0 10px #fff,
+      0 0 20px rgb(24, 23, 23),
+      0 0 40px rgb(24, 23, 23),
+      0 0 80px rgb(24, 23, 23),
+      0 0 90px rgb(24, 23, 23),
+      0 0 100px rgb(24, 23, 23),
+      0 0 150px rgb(24, 23, 23);
+  }
+
+  .neon-black2 {
+    color: rgb(0, 38, 255);
+    font-weight: 700;
+    text-shadow:
+      0 0 5px #fff,
+      /* 0 0 10px rgb(255, 255, 255),
+      0 0 20px rgb(245, 241, 35),
+      0 0 40px rgb(243, 134, 115),
+      0 0 80px rgb(247, 188, 62),
+      0 0 90px rgb(243, 245, 151),
+      0 0 100px rgb(221, 205, 58), */
+      0 0 150px rgb(255, 255, 255);
+  }
+
+
+  #heart {
+    display:inline-block;
+    position:relative;
+    top:42px;
+    left: 120px;  
+    border: 0px;
+  }
+
+  .btn-link{
+    border: 0px;
+  }
+
+
+
+div.rgyPostIt {
+  position: relative;
+  display: inline-block;
+  width: 45%;
+  height: auto;
+  padding: 20px 20px 20px 15px;
+  margin-top: 7px;
+  margin-bottom: 7px;
+  margin-right: 10px;
+  border: 1px solid #f8f861;
+  border-left: 30px solid #f8f861;
+  border-bottom-right-radius: 60px 10px;
+  font-family: 'Gowun Dodum';
+  font-size: 27px;
+  color: #555;
+  word-break: break-all;
+  background: #ffff88; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, right bottom, color-stop(81%, #ffff88), color-stop(82%, #ffff88), color-stop(82%, #ffff88), color-stop(100%, #ffffc6)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%); /* IE10+ */
+  background: linear-gradient(135deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff88', endColorstr='#ffffc6', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+
+div.rgyPostIt::after {
+  content: " ";
+  position: absolute;
+  z-index: -1;
+  right: 0;
+  bottom: 35px;
+  width: 150px;
+  height: 30px;
+  background-color: rgba(0, 0, 0, 0);
+  box-shadow: 2px 35px 5px rgba(0, 0, 0, 0.4);
+  -webkit-box-shadow: 2px 35px 5px rgba(0, 0, 0, 0.4);
+  transform: matrix(-1, -0.1, 0, 1, 0, 0);
+  -webkit-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+  -moz-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+  -ms-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+  -o-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+}
+
+div.rgyPostIt:hover {
+  border-bottom-right-radius: 75px 30px;
+}
+
+div.rgyPostIt:hover::after {
+  box-shadow: 2px 37px 7px rgba(0, 0, 0, 0.37);
+  -webkit-box-shadow: 2px 37px 7px rgba(0, 0, 0, 0.37);
+}
+
+div.rgyPostIt > p {
+  padding: 5px 0 !important;
+}
+
+div.rgyPostIt > p::before {
+  /* content:"\f198"; */
+  margin-right: 7px;
+  font-family: 'Gowun Dodum';
+  font-weight: normal;
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+div.rgyPostIt > p > a {
+  color: #555;
+}
+
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination li a{
+  color: black;
+  padding: 8px 16px;
+  text-decoration: none;
+}

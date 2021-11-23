@@ -1,0 +1,79 @@
+.btn-m3{
+    position: relative;
+    display: inline-block;
+    right:140px;
+    top:106px;
+    margin-left:auto;
+  }
+  
+  .btn-m3:hover{
+    background: blue;
+  }
+  
+  .btn-m4{
+    position: relative;
+    display: inline-block;
+    top: 50px;
+    text-decoration: none;
+    margin-left:auto;
+  }
+  
+  
+  .btn-m4:hover{
+    background: crimson;
+  }
+  
+  .detailbox{
+    background: whitesmoke;
+    color: black;
+    padding: 20px;
+    border-radius: 10px;
+    outline: white solid 5px;
+  
+  }
+
+
+  .comment-btn{
+      position: relative;
+      background: white;
+      outline:  white solid 1px;
+      width: 30px;
+      height: 30px;
+      color:black;
+      display: inline-block;
+      /* top: 22px; */
+      left: 10px;
+      text-align: center;
+
+  }
+
+
+  .comment-btn:hover{
+    background: crimson;
+  }
+
+  .btn-m7{
+    position: relative;
+    display: inline-block;
+    /* right:140px; */
+    /* top:106px; */
+    margin-left:auto;
+  }
+  
+  .btn-m7:hover{
+    background: blue;
+  }
+
+
+
+  .btn-m8{
+    position: relative;
+    display: inline-block;
+    /* bottom: 50px; */
+    text-decoration: none;
+    margin-left:auto;
+  }
+  
+  .btn-m8:hover{
+    background: crimson;
+  }

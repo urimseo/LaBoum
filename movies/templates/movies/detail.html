@@ -26,7 +26,7 @@ LA BOUM - Detail
       {% endfor %}</p>
 
       <p style="color:yellow; font-size:20px"> 평점: {{movie.vote_average}}</p>
-      <p style="font-size:20px;"> {{movie.overview}}</p>
+      <p style="font-size:20px;"> {{ movie.overview|linebreaksbr }}</p>
     </div>
   </div>
 </div>

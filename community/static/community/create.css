@@ -17,30 +17,7 @@ input {
 
 
 /* CSS */
-.button-64 {
-  align-items: center;
-  background-image: linear-gradient(144deg,#f879b6,#9982ed 50%, #f1703d);
-  border: 0;
-  border-radius: 8px;
-  box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
-  box-sizing: border-box;
-  color: #FFFFFF;
-  display: flex;
-  font-family: 'Gowun Dodum';
-  font-size: 20px;
-  justify-content: center;
-  line-height: 1em;
-  max-width: 100%;
-  min-width: 140px;
-  padding: 3px;
-  text-decoration: none;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  white-space: nowrap;
-  cursor: pointer;
-  
-}
+
 
 .button-64:active,
 .button-64:hover {
@@ -69,13 +46,18 @@ input {
 
 .btn-m1{
   position: relative;
-  left: 63%;
+  left: 73%;
+  bottom: 22px;;
+}
+
+.btn-m1:hover{
+  background: blue;
 }
 
 .btn-m2{
   position: relative;
-  left: 70%;
-  bottom: 63px;
+  left: 72%;
+  bottom: 78px;
   text-decoration: none;
 }
 
@@ -83,3 +65,4 @@ input {
 .btn-m2:hover{
   background: crimson;
 }
+

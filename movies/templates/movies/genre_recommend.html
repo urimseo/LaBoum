@@ -18,11 +18,12 @@ LA BOUM - Genre
 <br>
 <div class="container-fluid" style="background:black">
     <div style="text-align:center">
-       <p class="font-effect-neon" style='color:white;font-size:100px'>
+       <p class="neon neon-s" style='color:white;font-size:2.5rem;'>
       {% for genre in selectedgenres  %}
         {{genre.name}}
       {% endfor %}</p>
       <br>
+     
     </div>
     <div>
       <div style="text-align:center">
@@ -31,7 +32,6 @@ LA BOUM - Genre
         <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3">
         </audio> 
       </div>
-      <br>
       <br>
       <br>
     </div>

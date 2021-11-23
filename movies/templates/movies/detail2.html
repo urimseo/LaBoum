@@ -30,7 +30,7 @@
       </audio>
       <br>
       <br>
-      <p style="font-size:20px;"> {{movie.overview}}</p>
+      <p style="font-size:20px;"> {{movie.overview|linebreaksbr}}</p>
       {% for genre in movie.genres.filter %}
       <a href="{% url 'movies:genre_recommend' movie.pk%}" id="genre_link" style="font-size:21px;">{{genre.name}} 장르 추천 영화 목록 보러가기</a>{% endfor %}
     </div>

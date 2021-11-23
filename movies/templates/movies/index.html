@@ -20,7 +20,7 @@ LA BOUM
             <div class="carousel-item active" style="width:100%; text-align:center;">
               <div class="caro1">
                 <span style="font-size:40px; color:yellow;font-weight:700;"> 이 달의 OST: Squid Game(Pink Soldiers) </span>
-                <audio controls loop onloadstart="this.volume=0.2" id="audio-player">
+                <audio controls autoplay loop onloadstart="this.volume=0.2" id="audio-player">
                 <source src={% static 'movies/audio/Pink Soldiers.mp3' %} type="audio/mp3">
                 </audio>
               </div>
@@ -30,9 +30,9 @@ LA BOUM
             </div>
             <div class="carousel-item" style="text-align:center; height:738.3px;">
               <div class="caro2">
+                <button class="ghost2" style="text-align:center;" onclick="location.href='{% url 'movies:color' %}'">Color 고르기</button>
                 <p id="ost"> 당신의 현재 기분을 Color로 표현하세요.</p>
                 <p id="ost"> 당신의 기분에 맞는 영화를 추천해드립니다!</p>
-                <button class="ghost" style="text-align:center;" onclick="location.href='{% url 'movies:color' %}'">Color 고르기</button>
               </div>
               <img src="{% static 'movies/color3.png' %}" alt="Laboum_logo_img" style="width:70%; height:100%;">
             </div>
@@ -61,14 +61,16 @@ LA BOUM
           </button>
         </div>
         <br><br><hr> 
+      <section id="ost-content">  
         <img src="{% static 'movies/red.png'%}" alt="img" id="red">
         <div class="theater" style="display:inline-block; text-align:center">
           <img src="{% static 'movies/rabbit_02.png' %}" alt="img">
-          <p style="font-size:100px; margin-bottom:70px;">OST 영화관</p>
-          <p style="font-size:40px;">ost를 듣고, 장르별 영화를 확인하세요!</p>
+          <p class="neon-black neon-s" style="font-size:100px; margin-bottom:70px;">OST 영화관</p>
+          <p class="neon-black neon-s" style="font-size:40px;">ost를 듣고, 장르별 영화를 확인하세요!</p>
           <span style="font-size:20px; color:yellow;"> ( 영화 또는 장르 선택 ) </span>
         </div>
    </div>
+      </section>
 
 
 <div class="container-fluid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-0" style="margin-left:70px;" id="card-container">
