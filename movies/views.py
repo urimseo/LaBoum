@@ -1,5 +1,5 @@
 from django.http.response import JsonResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views.decorators.http import require_safe
 from django.contrib.auth.decorators import login_required
 from .models import Movie, Genre_movie
@@ -7,6 +7,37 @@ from django.core.paginator import Paginator
 from django.core import serializers
 from django.http import HttpResponse
 from itertools import chain
+
+import requests
+from Laboum import settings
+from .forms import MovieSearchForm
+
+from django.db.models import Q
+# 검색기능 
+
+def search(request):
+    movies = Movie.objects.all()
+    genre_movies = Genre_movie.objects.all()
+    if 'keyword' in request.GET:
+        keyword = request.GET['keyword']
+        if keyword:
+            movies = movies.filter(Q(title__icontains=keyword)| Q(title__istartswith=keyword[:2]))
+            genre_movies = genre_movies.filter(Q(title__icontains=keyword)| Q(title__istartswith=keyword[:2]))
+            if movies:
+                movie_pk = movies[0].pk
+
+                return redirect('movies:detail', movie_pk)
+
+            # movies = genre_movies.filter(Q(title__icontains=keyword)| Q(title__istartswith=keyword[:2]))
+            elif genre_movies:
+                movie_pk = genre_movies[0].pk
+                return redirect('movies:detail2', movie_pk)
+
+    # context = {
+    #     'err' : '검색 결과가 없습니다.'
+    # }
+    return redirect('movies:index')     
+
 
 
 # Create your views here.
@@ -39,9 +70,27 @@ def detail(request, movie_pk):
     # genres = movie.genres.filter(movie=movie_pk)
     genres = movie.genres.filter()
     # print(genres)
+
+    ## youtube api로 예고편 가져오기
+    # print(movie)
+    keyword = f'영화 {movie} 예고편'
+    url = 'https://www.googleapis.com/youtube/v3/search'
+    params = {
+        'key': settings.YOUTUBE_API_KEY,
+        'part': 'snippet',
+        'type': 'video',
+        'maxResults': '1',
+        'q': keyword,
+    }
+    response = requests.get(url, params)
+    response_dict = response.json()
+    videoId = response_dict['items'][0]['id']['videoId']
+
     context = {
         'movie' : movie,
         'genres' : genres,
+        'videoId' : videoId,
+        'youtube_items': response_dict['items']
     }
     return render(request, 'movies/detail.html', context)
 
@@ -50,10 +99,27 @@ def detail(request, movie_pk):
 def detail2(request, genre_movie_pk):
     movie = get_object_or_404(Genre_movie, pk=genre_movie_pk)
     genres = movie.genres.filter()
-    # print(genres)
+
+    # youtube api
+    # print(movie)
+    keyword = f'영화 {movie} 예고편'
+    url = 'https://www.googleapis.com/youtube/v3/search'
+    params = {
+        'key': settings.YOUTUBE_API_KEY,
+        'part': 'snippet',
+        'type': 'video',
+        'maxResults': '1',
+        'q': keyword,
+    }
+    response = requests.get(url, params)
+    response_dict = response.json()
+    videoId = response_dict['items'][0]['id']['videoId']
     context = {
         'movie' : movie,
         'genres' : genres,
+        # youtube
+        'videoId' : videoId,
+        'youtube_items': response_dict['items']
     }
     return render(request, 'movies/detail2.html', context)    
 
@@ -108,27 +174,18 @@ def color(request):
 def genre_recommend(request, genre_movie_pk):
     movie = get_object_or_404(Genre_movie, pk=genre_movie_pk)
     selectedgenres = movie.genres.all()
-    # print(selectedgenres[0].name)
     movies = Genre_movie.objects.filter(genres=selectedgenres[0])
-    # movies = list(movies)
-    print(Genre_movie.objects.filter(genres=selectedgenres[0]))
+    # print(Genre_movie.objects.filter(genres=selectedgenres[0]))
     second_movies = Movie.objects.filter(genres=selectedgenres[0])
-    # second_movies = list(second_movies)
-    # results = Genre_movie.objects.filter(genres=selectedgenres[0]).values("title", "poster_path", "id").union(Movie.objects.filter(genres=selectedgenres[0]).values("title", "poster_path", "id"))
-    # print(results)
 
-    # for b in second_movies:
-    #     if b not in movies:
-    #         movies.append(b)
+
                   
     context = {
         'movie': movie,
         'selectedgenres': selectedgenres,
         'movies': movies,
         'second_movies': second_movies,
-        # 'results': results,
-      
-      
+
     }
     return render(request, 'movies/genre_recommend.html', context)
     

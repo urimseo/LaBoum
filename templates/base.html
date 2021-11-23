@@ -72,8 +72,15 @@
                     <li class="nav-item justify-content-center"><a data-scroll href="{% url 'movies:index' %}" class="nav-link active" style="font-size:25px;">Home</a></li>
                     <li class="nav-item justify-content-center"><a data-scroll href="{% url 'movies:color' %}" class="nav-link" style="font-size:25px;">Color</a></li>
                     <li class="nav-item justify-content-center"><a data-scroll href="{% url 'community:index' %}" class="nav-link" style="font-size:25px;">Community</a></li>
-                    
                     <li class="nav-item"><a data-scroll href="{% url 'movies:recommended' %}" class="nav-link" style="font-size:25px;">Top 10</a></li>
+                    <li class="nav-item">
+                    <div id="full-page-search">
+                        <form action ="{% url 'movies:search' %}" class="search-header" method="GET">
+                            <input class="form-control me-2" type="search" value="" placeholder="영화를 검색하세요" name="keyword">
+                            <button type="submit" class="btn btn-outline-success">Search</button>
+                        </form>    
+                    </div>
+                    </li>
                      {% else %}
                     <li class="nav-item"><a data-scroll href="{% url 'accounts:signup' %}" class="nav-link" style="font-size:25px;">Signup</a></li>
                     {% endif %}
