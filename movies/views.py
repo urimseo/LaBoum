@@ -68,13 +68,12 @@ def detail(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
     genres = movie.genres.filter()
 
-    ## youtube api로 예고편 가져오기
+    # youtube api로 예고편 가져오기
     keyword = f'영화 {movie} 예고편'
     url = 'https://www.googleapis.com/youtube/v3/search'
     params = {
         'key': settings.YOUTUBE_API_KEY,
         'part': 'snippet',
-        'type': 'video',
         'maxResults': '1',
         'q': keyword,
     }

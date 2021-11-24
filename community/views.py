@@ -136,14 +136,3 @@ def like(request, review_pk):
     # return redirect('accounts:login')
     return HttpResponse(status=401)
 
-# @require_POST
-# def dislike_review(request, review_pk):
-#     review = get_object_or_404(Review, pk=review_pk)
-#     if review.dislike_users.filter(pk=request.user.pk).exists():
-#         # 취소
-#         review.dislike_users.remove(request.user)
-#     # 아니라면
-#     else:
-#         # 추가
-#         review.dislike_users.add(request.user)
-#     return redirect('community:review_detail', review.pk)
