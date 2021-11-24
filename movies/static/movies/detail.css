@@ -1,7 +1,38 @@
-/* .bgimg {
-  width: auto;
+/* 
+#bgimg {
+  width:100%; 
+  position: relative;
+  background-repeat: no-repeat; 
+  background-size: cover;
+  z-index: 1;
+  background-image:url({{movie.poster_path}});
+}
+ */
+ 
+ header {
+   height: 150px;
+ }
+
+ #top {
+  margin: -55 150 50 100;
+  padding: 0 150 50 100;
+ }
+
+ .box1{
+  background-size: cover;
+  position: relative;
+  background-repeat: no-repeat;
   height: auto;
-  opacity: 0.3;
-  background-size:auto;
-} */
+}
+
+hr {
+  width:auto;
+  margin-bottom: 100px;
+}
+
+.plz {
+  padding: 0 60 60 60;
+  height: auto;
+  background-image: linear-gradient(rgba(10,10,10,0.9), rgba(10,10,10,0.8));
+}
 

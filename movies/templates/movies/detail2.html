@@ -1,45 +1,56 @@
 {% extends 'base.html' %}
 {% load static %}
-
+{% block title %}
+LaBoum - Detail
+{% endblock title %}
 
 {% block link %}
+  <link rel="stylesheet" href="{% static 'movies/detail.css' %}">
   <link rel="stylesheet" href="{% static 'movies/index.css' %}">
   <link rel="stylesheet" href="{% static 'movies/index_card.css' %}">
 {% endblock link %}
 
 {% block content %}
 <br>
-<br>
-<div class="container-fulid d-flex" style="margin-left:200px;margin-right:200px;">
-  <div class="row">
-    <div class="col-4">
-      <img src="{{movie.poster_path}}" alt="img" style="width: 100%;">
-    </div>
-    <div class='col-8'>
-      <h1 class='m-title' style="color:crimson;text-align:center;fw-bold;"> {{ movie.title }}</h1>
-      <br>
-      <p style='color:rgb(3, 248, 114);font-size:25px'> 개봉일: {{movie.release_date}}</p>
-       <p style='color:rgb(3, 248, 114);font-size:25px'>장르: 
-      {% for genre in genres  %}
-        {{genre.name}}
-      {% endfor %}  /  상영시간:{{movie.running_time}}분  /  평점: {{movie.grade}}</p>
 
-      <span style="color:yellow"> {{movie.ost}}</span> 
-      <audio autoplay controls loop id="audio-player">
-      <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3">
-      </audio>
-      <br>
-      <br>
-      <p style="font-size:20px;"> {{movie.overview|linebreaksbr}}</p>
-      {% for genre in movie.genres.filter %}
-      <a href="{% url 'movies:genre_recommend' movie.pk%}" id="genre_link" style="font-size:21px;">{{genre.name}} 장르 추천 영화 목록 보러가기</a>{% endfor %}
+<div class="box1"style="background-image:url({{movie.poster_path}});" id="bgimg">
+  <br>
+  <div class="plz">
+    <div class="row" id="top">
+      <b><h1 class='m-title' style=" color:white; text-align:center; margin-top:20px;"> {{ movie.title }}</h1></b>
+      <br><hr style="margin-top:20px; margin-bottom:20px;">
+        <div class="col-4" style="margin-top:50px;">
+          <img src="{{movie.poster_path}}" alt="img" style="width: 80%;">
+        </div>
+        <div class='col-8'>
+          <div class="row">
+            <div class="col-5" >
+              <p style='color:rgb(3, 248, 114);font-size:25px; line-height:1.8;'> 평점: {{movie.grade}} <br>
+              개봉일: {{movie.release_date}} <br>
+              장르: 
+              {% for genre in genres  %}
+                {{genre.name}}
+              {% endfor %} <br>상영시간:{{movie.running_time}}분 <br>  </p>
+
+              <span style="color:yellow"> {{movie.ost}}</span> 
+              <audio autoplay controls loop id="audio-player">
+              <source src='{% get_static_prefix %}movies/audio/{{ movie.ost }}.mp3' type="audio/mp3">
+              </audio>
+              <br><br>
+            </div>
+            <div class="col-7 justify-content-center align-items-center" style="height: 300px;">
+              <iframe src='http://www.youtube.com/embed/{{videoId}}' frameborder="0" width="520" height="300"></iframe>
+            </div>
+              {% for genre in movie.genres.filter %}
+              <a href="{% url 'movies:genre_recommend' movie.pk%}" id="genre_link" style="font-size:21px;">{{genre.name}} 장르 추천 영화 목록 보러가기</a>{% endfor %}
+              <br>
+              <h3 style="color:white;">줄거리</h3>  <hr>
+              <p style="font-size:22px; line-height:1.4;"> {{ movie.overview|linebreaksbr }}</p>
+          </div>
+        </div>
     </div>
   </div>
-
-  </div>
-  <div>
-    <iframe src='http://www.youtube.com/embed/{{videoId}}' frameborder="0" width="420" height="315"></iframe>
-  </div>
+</div>
 
 {% endblock %}
 
