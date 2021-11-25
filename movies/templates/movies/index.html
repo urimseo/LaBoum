@@ -17,7 +17,7 @@ LaBoum
             <div class="carousel-item active" style="width:100%; text-align:center;">
               <div class="caro1">
                 <span style="font-size:40px; color:yellow;font-weight:700;"> 이 달의 OST: Squid Game(Pink Soldiers) </span>
-                <audio controls autoplay loop onloadstart="this.volume=0.2" id="audio-player">
+                <audio controls autoplay loop onloadstart="this.volume=0.15" id="audio-player">
                 <source src={% static 'movies/audio/Pink Soldiers.mp3' %} type="audio/mp3">
                 </audio>
               </div>
@@ -28,8 +28,8 @@ LaBoum
             <div class="carousel-item" style="text-align:center; height:738.3px;">
               <div class="caro2">
                 <button class="ghost2" style="text-align:center;" onclick="location.href='{% url 'movies:color' %}'">Color 고르기</button>
-                <p id="ost"> 당신의 현재 기분을 Color로 표현하세요.</p>
-                <p id="ost"> 당신의 기분에 맞는 영화를 추천해드립니다!</p>
+                <p style="background-color:black;font-size: 32px;margin-bottom:18px; padding: 10px;display:inline-block"> 당신의 현재 기분을 Color로 표현하세요.</p><br>
+                <p style="background-color:black;font-size: 32px;margin-bottom:18px; padding: 10px;display:inline-block"> 당신의 기분에 맞는 영화를 추천해드립니다!</p>
               </div>
               <img src="{% static 'movies/colorful.jpg' %}" alt="Laboum_logo_img" style="width:70%; height:100%;">
             </div>
