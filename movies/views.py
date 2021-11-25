@@ -131,11 +131,11 @@ def recommended(request):
 
 @login_required
 def color(request):
-    reds = Movie.objects.filter(genres__in=[80, 10752,28, 37])
-    yellows = Movie.objects.filter(genres__in=[35, 18])
-    pinks = Movie.objects.filter(genres__in=[10749, 16])
+    reds = Movie.objects.filter(genres__in=[28, 10752, 80, 37])
+    yellows = Movie.objects.filter(genres__in=[16, 35])
+    pinks = Movie.objects.filter(genres__in=[10749, 18])
     greens = Movie.objects.filter(genres__in=[10751, 99, 10402])
-    blues = Movie.objects.filter(genres__in=[878, 14])
+    blues = Movie.objects.filter(genres__in=[14, 878])
     purples = Movie.objects.filter(genres__in=[9648, 53, 27])
     context = {}
     if 'keyword' in request.POST:
