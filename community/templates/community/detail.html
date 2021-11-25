@@ -14,26 +14,35 @@ LaBoum - Community
 <br>
 <div class="container">
   <h1 class="text-center neon-black" style="color:white;">{{review.title}}</h1>
-
   <br>
   <div class="detailbox">
     <p style="color:black; font-size:30px; font-weight:700; text-align:center;">[영화리뷰] {{ review.movie_title }}</p>
     <p style="color:crimson; font-size:25px; font-weight:700; text-align:center;">{{ review.get_rank_display }}</p>
     <br><br>
-    <p style="color:black; font-size:22px;">{{ review.content|linebreaksbr }}</p>
-    <p style="color:black; margin-bottom:10px; text-align:end;">작성 시각: {{ review.created_at }}</p>
-    <p style="color:black; text-align:end;">수정 시각: {{ review.updated_at }}</p>
-    <div class="text-align:end">
-      {% if request.user == review.user %}
-      <form action="{% url 'community:update_review' review.pk %}" method="GET">
-        <button type="submit" class="button-64 btn-m3" role="button"><span class="text">수정하기</span></button>
-      </form>
+    <div class="row">
+      <div class="col-2">
+        <img src="{{poster}}" alt="img" style="width: 100%;">
+          <a href="{% url 'movies:detail' movie_pk %}" style="font-size:20px;">
+          이 영화 보러 가기 
+          </a>
+      </div>
+      <div class="col-10">
+        <p style="color:black; font-size:22px;">{{ review.content|linebreaksbr }}</p>
+        <p style="color:black; margin-bottom:10px; text-align:end;">작성 시각: {{ review.created_at }}</p>
+        <p style="color:black; text-align:end;">수정 시각: {{ review.updated_at }}</p>
+        <div class="text-align:end">
+          {% if request.user == review.user %}
+          <form action="{% url 'community:update_review' review.pk %}" method="GET">
+            <button type="submit" class="button-64 btn-m3" role="button"><span class="text">수정하기</span></button>
+          </form>
 
-      <form action="{% url 'community:delete_review' review.pk %}" method="POST">
-      {% csrf_token %}
-      <button type="submit" class="button-64 btn-m4" role="button"><span class="text">삭제하기</span></button>
-      </form>
-      {% endif %}
+          <form action="{% url 'community:delete_review' review.pk %}" method="POST">
+          {% csrf_token %}
+          <button type="submit" class="button-64 btn-m4" role="button"><span class="text">삭제하기</span></button>
+          </form>
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
 <br><br>

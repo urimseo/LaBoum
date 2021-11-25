@@ -3,6 +3,7 @@ from django.views.decorators.http import require_GET, require_POST, require_http
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from .models import Review, Comment
+from movies.models import Movie
 from .forms import ReviewForm, CommentForm
 from django.http.response import JsonResponse
 from django.http import HttpResponse
@@ -50,10 +51,16 @@ def detail(request, review_pk):
     review = get_object_or_404(Review, pk=review_pk)
     comments = review.comment_set.all()
     comment_form = CommentForm()
+    # print(review.movie_title)
+    movie = Movie.objects.filter(title = review.movie_title)
+    poster = movie[0].poster_path
+    movie_pk = movie[0].pk
     context = {
         'review': review,
         'comment_form': comment_form,
         'comments': comments,
+        'poster': poster,
+        'movie_pk': movie_pk,
     }
     return render(request, 'community/detail.html', context)
 
