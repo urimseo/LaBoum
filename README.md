@@ -167,7 +167,7 @@
 
 #### 5.3.3 Review Detail
 
-![image-20211126010250683](README.assets/image-20211126010250683.png)
+![image-20211126010250683](Readme.assets/image-20211126010250683.png)
 
 - 작성한 리뷰는 수정/삭제가 가능하며 댓글을 남길 수 있다.
 
